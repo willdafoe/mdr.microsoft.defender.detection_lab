@@ -18,7 +18,7 @@ module "virtual_network" {
   location            = var.location
   stage               = var.stage
   resource_group_name = module.resource_group.resource_group_name
-  address_space       = var.address_space
+  address_space       = local.address_space
 }
 
 module "subnet" {

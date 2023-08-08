@@ -1,5 +1,6 @@
 variable "enabled" {
-  type = bool
+  type    = bool
+  default = true
 }
 
 variable "name" {
@@ -11,11 +12,13 @@ variable "namespace" {
 }
 
 variable "environment" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "stage" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "location" {
@@ -23,7 +26,7 @@ variable "location" {
 }
 
 variable "address_space" {
-  type = list(string)
+  type = string
 }
 
 variable "subnet_count" {

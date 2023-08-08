@@ -33,14 +33,14 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_address_space"></a> [address\_space](#input\_address\_space) | n/a | `list(string)` | n/a | yes |
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | n/a | `bool` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | n/a | `string` | n/a | yes |
+| <a name="input_address_space"></a> [address\_space](#input\_address\_space) | n/a | `string` | n/a | yes |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | n/a | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | n/a | `string` | `null` | no |
 | <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
 | <a name="input_max_subnet_count"></a> [max\_subnet\_count](#input\_max\_subnet\_count) | n/a | `number` | `0` | no |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | n/a | yes |
-| <a name="input_stage"></a> [stage](#input\_stage) | n/a | `string` | n/a | yes |
+| <a name="input_stage"></a> [stage](#input\_stage) | n/a | `string` | `null` | no |
 | <a name="input_subnet_count"></a> [subnet\_count](#input\_subnet\_count) | n/a | `number` | `1` | no |
 
 ## Outputs
