@@ -79,10 +79,10 @@ module "windows_virtual_machine" {
 
 resource "local_file" "inventory" {
   for_each = local.config.WINDOWS_VIRTUAL_MACHINE
-  content = templatefile("${path.module}/inventory.tpl", {
+  content = templatefile("${path.module}/templates/inventory.tpl", {
     resource_group_name = module.resource_group.resource_group_name
     admin_username      = each.value.admin_username
     admin_password      = each.value.admin_password
   })
-  filename = "${path.module}/myazure_rm.yml"
+  filename = "${path.module}/ansible/myazure_rm.yml"
 }
