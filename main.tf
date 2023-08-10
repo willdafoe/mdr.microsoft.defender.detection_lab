@@ -1,5 +1,6 @@
 module "resource_group" {
-  source      = "github.com/willdafoe/sophos.azurerm.resource_group"
+  source      = "app.terraform.io/mdr-team/resource_group/azure"
+  version     = "1.0.0"
   enabled     = var.enabled
   name        = var.name
   namespace   = var.namespace
@@ -9,7 +10,8 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source              = "github.com/willdafoe/sophos.azurerm.virtual_network"
+  source              = "app.terraform.io/mdr-team/virtual_network/azure"
+  version             = "1.0.0"
   depends_on          = [module.resource_group]
   enabled             = var.enabled
   name                = var.name
@@ -21,8 +23,9 @@ module "virtual_network" {
   address_space       = local.address_space
 }
 
-module "subnet" {
-  source              = "github.com/willdafoe/sophos.azurerm.subnet"
+module "dynamic_subnets" {
+  source              = "app.terraform.io/mdr-team/dynamic_subnets/azure"
+  version             = "1.0.0"
   depends_on          = [module.virtual_network]
   enabled             = var.enabled
   name                = var.name
@@ -37,7 +40,8 @@ module "subnet" {
 }
 
 module "security_group" {
-  source              = "github.com/willdafoe/sophos.azurerm.security_group"
+  source              = "app.terraform.io/mdr-team/security_group/azure"
+  version             = "1.0.0"
   depends_on          = [module.resource_group]
   enabled             = var.enabled
   name                = var.name
@@ -50,13 +54,14 @@ module "security_group" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
-  depends_on                = [module.subnet, module.security_group]
-  subnet_id                 = module.subnet.subnet_id
+  depends_on                = [module.dynamic_subnets, module.security_group]
+  subnet_id                 = module.dynamic_subnets.subnet_id
   network_security_group_id = module.security_group.security_group_id
 }
 
 module "windows_virtual_machine" {
-  source              = "github.com/willdafoe/sophos.azurerm.windows_virtual_machine"
+  source              = "app.terraform.io/mdr-team/windows_virtual_machine/azure"
+  version             = "1.0.0"
   for_each            = local.config.WINDOWS_VIRTUAL_MACHINE
   enabled             = var.enabled
   name                = var.name
@@ -72,7 +77,7 @@ module "windows_virtual_machine" {
   resource_group_name = module.resource_group.resource_group_name
   admin_username      = each.value.admin_username
   admin_password      = each.value.admin_password
-  subnet_id           = module.subnet.subnet_id
+  subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
   tags                = each.value.tags
 }

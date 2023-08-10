@@ -19,15 +19,15 @@ output "virtual_network_address_space" {
 }
 
 output "subnet_id" {
-  value = module.subnet.subnet_id
+  value = module.dynamic_subnets.subnet_id
 }
 
 output "subnet_name" {
-  value = module.subnet.subnet_name
+  value = module.dynamic_subnets.subnet_name
 }
 
 output "subnet_address_prefixes" {
-  value = module.subnet.subnet_address_prefixes
+  value = module.dynamic_subnets.subnet_address_prefixes
 }
 
 output "security_group_id" {
