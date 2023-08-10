@@ -7,6 +7,7 @@
   collections:
     - sophos.mdr
   vars:
+    run_git: false
     #deployment_name: '{{ deployment_name }}'
     #state: '{{ state }}'
     #trusted_ip: '{{ trusted_ip }}'
@@ -21,6 +22,11 @@
 
   tasks:
     - block:
+        - name: "[ansible.playbook] cloning repository"
+          import_role:
+            name: git
+          when: run_git == true
+        
         - name: "[ansible.playbook] provisioning infrastructure"
           import_role:
             name: terraform
