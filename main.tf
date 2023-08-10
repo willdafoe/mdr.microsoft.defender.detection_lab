@@ -1,5 +1,5 @@
 module "resource_group" {
-  source      = "github.com/willdafoe/sophos.azurerm.resource_group.git"
+  source      = "github.com/willdafoe/sophos.azurerm.resource_group"
   enabled     = var.enabled
   name        = var.name
   namespace   = var.namespace
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source              = "github.com/willdafoe/sophos.azurerm.virtual_network.git"
+  source              = "github.com/willdafoe/sophos.azurerm.virtual_network"
   depends_on          = [module.resource_group]
   enabled             = var.enabled
   name                = var.name
@@ -22,7 +22,7 @@ module "virtual_network" {
 }
 
 module "subnet" {
-  source              = "github.com/willdafoe/sophos.azurerm.subnet.git"
+  source              = "github.com/willdafoe/sophos.azurerm.subnet"
   depends_on          = [module.virtual_network]
   enabled             = var.enabled
   name                = var.name
@@ -37,7 +37,7 @@ module "subnet" {
 }
 
 module "security_group" {
-  source              = "github.com/willdafoe/sophos.azurerm.security_group.git"
+  source              = "github.com/willdafoe/sophos.azurerm.security_group"
   depends_on          = [module.resource_group]
   enabled             = var.enabled
   name                = var.name
@@ -56,7 +56,7 @@ resource "azurerm_subnet_network_security_group_association" "this" {
 }
 
 module "windows_virtual_machine" {
-  source              = "github.com/willdafoe/sophos.azurerm.windows_virtual_machine.git"
+  source              = "github.com/willdafoe/sophos.azurerm.windows_virtual_machine"
   for_each            = local.config.WINDOWS_VIRTUAL_MACHINE
   enabled             = var.enabled
   name                = var.name

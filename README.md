@@ -16,11 +16,11 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | github.com/willdafoe/sophos.azurerm.resource_group.git | n/a |
-| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | github.com/willdafoe/sophos.azurerm.security_group.git | n/a |
-| <a name="module_subnet"></a> [subnet](#module\_subnet) | github.com/willdafoe/sophos.azurerm.subnet.git | n/a |
-| <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | github.com/willdafoe/sophos.azurerm.virtual_network.git | n/a |
-| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | github.com/willdafoe/sophos.azurerm.windows_virtual_machine.git | n/a |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | github.com/willdafoe/sophos.azurerm.resource_group | n/a |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | github.com/willdafoe/sophos.azurerm.security_group | n/a |
+| <a name="module_subnet"></a> [subnet](#module\_subnet) | github.com/willdafoe/sophos.azurerm.subnet | n/a |
+| <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | github.com/willdafoe/sophos.azurerm.virtual_network | n/a |
+| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | github.com/willdafoe/sophos.azurerm.windows_virtual_machine | n/a |
 
 ## Resources
 
