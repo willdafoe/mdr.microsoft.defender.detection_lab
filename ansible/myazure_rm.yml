@@ -1,6 +1,6 @@
 plugin: azure.azcollection.azure_rm
 include_vm_resource_groups:
-    - ${ resource_group_name }
+    - test.test.test.test.eastus-00
 
 conditional_groups:
     all: true
