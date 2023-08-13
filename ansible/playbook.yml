@@ -10,19 +10,30 @@
     terraform_variables:
       name: '{{ name }}'
       namespace: '{{ namespace }}'
+      environment: '{{ environment }}'
+      stage: '{{ stage }}'
+      admin_username: '{{ admin_username }}'
+      admin_password: '{{ admin_password }}'
+      trusted_ip: '{{ trusted_ip }}'
       location: '{{ location }}'
       address_space: '{{ address_space }}'
 
   tasks:
-    - block:        
-        - name: "[ansible.playbook] provisioning infrastructure"
-          import_role:
-            name: terraform
-          vars:
-            state: '{{ state }}'
-            variables: '{{ terraform_variables }}'
-
-      delegate_to: localhost
+    - name: "[microsoft.defender.lab] generating configuration template"
+      ansible.builtin.template:
+        src: '{{ project_path }}/templates/config.yml.j2'
+        dest: '{{ project_path }}/config/config.yml'
+#    - block:        
+#        - name: "[ansible.playbook] running terraform plan"
+#          import_role:
+#            name: terraform
+#            tasks_from: plan.yml
+#          vars:
+#            variables: '{{ terraform_variables }}'
+#
+#      delegate_to: localhost
+#      when: tf_command == "plan"
+  
 
 #- name: "[ansible.play] configuring domain controller"
 #  hosts: domain_controllers

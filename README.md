@@ -11,6 +11,7 @@ No requirements.
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.69.0 |
 | <a name="provider_local"></a> [local](#provider\_local) | 2.4.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 
 ## Modules
 
@@ -28,20 +29,24 @@ No requirements.
 |------|------|
 | [azurerm_subnet_network_security_group_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [local_file.inventory](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [random_password.admin_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_address_space"></a> [address\_space](#input\_address\_space) | n/a | `string` | n/a | yes |
+| <a name="input_address_space"></a> [address\_space](#input\_address\_space) | n/a | `string` | `"192.168.10.0/23"` | no |
+| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | n/a | `string` | `null` | no |
+| <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | n/a | `string` | `"sophosAdmin"` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | n/a | `bool` | `true` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | n/a | `string` | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | n/a | `any` | `null` | no |
 | <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
 | <a name="input_max_subnet_count"></a> [max\_subnet\_count](#input\_max\_subnet\_count) | n/a | `number` | `0` | no |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | n/a | yes |
-| <a name="input_stage"></a> [stage](#input\_stage) | n/a | `string` | `null` | no |
+| <a name="input_stage"></a> [stage](#input\_stage) | n/a | `any` | `null` | no |
 | <a name="input_subnet_count"></a> [subnet\_count](#input\_subnet\_count) | n/a | `number` | `1` | no |
+| <a name="input_trusted_ip"></a> [trusted\_ip](#input\_trusted\_ip) | n/a | `string` | `null` | no |
 
 ## Outputs
 

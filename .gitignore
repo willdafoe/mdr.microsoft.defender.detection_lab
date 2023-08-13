@@ -29,6 +29,7 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 *tfplan*
+**.plan
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
@@ -38,3 +39,13 @@ terraform.rc
 
 # Ignore test
 **/test
+
+# Local variables file
+*my_variables.yml
+
+# Ansible Collections
+**/collections/ansible_collections/*
+
+# Config file
+**config/config.yml
+**ansible/inventory/myazure_rm.yml

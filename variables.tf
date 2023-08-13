@@ -12,12 +12,10 @@ variable "namespace" {
 }
 
 variable "environment" {
-  type    = string
   default = null
 }
 
 variable "stage" {
-  type    = string
   default = null
 }
 
@@ -26,7 +24,8 @@ variable "location" {
 }
 
 variable "address_space" {
-  type = string
+  type    = string
+  default = "192.168.10.0/23"
 }
 
 variable "subnet_count" {
@@ -37,4 +36,20 @@ variable "subnet_count" {
 variable "max_subnet_count" {
   type    = number
   default = 0
+}
+
+variable "trusted_ip" {
+  type    = string
+  default = null
+}
+
+variable "admin_username" {
+  type    = string
+  default = "sophosAdmin"
+}
+
+variable "admin_password" {
+  type      = string
+  default   = null
+  sensitive = true
 }

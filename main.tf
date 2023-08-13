@@ -49,14 +49,19 @@ module "security_group" {
   environment         = var.environment
   location            = var.location
   stage               = var.stage
+  trusted_ip          = var.trusted_ip
   resource_group_name = module.resource_group.resource_group_name
-  security_rule       = local.config.SECURITY_RULES.inbound_rules
+  security_rule       = local.security_rules
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
   depends_on                = [module.dynamic_subnets, module.security_group]
   subnet_id                 = module.dynamic_subnets.subnet_id
   network_security_group_id = module.security_group.security_group_id
+}
+
+resource "random_password" "admin_password" {
+  length = 16
 }
 
 module "windows_virtual_machine" {
@@ -75,8 +80,8 @@ module "windows_virtual_machine" {
   vm_instance_count   = each.value.vm_instance_count
   computer_name       = each.value.computer_name
   resource_group_name = module.resource_group.resource_group_name
-  admin_username      = each.value.admin_username
-  admin_password      = each.value.admin_password
+  admin_username      = var.admin_username
+  admin_password      = random_password.admin_password.result
   subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
   tags                = each.value.tags
@@ -86,8 +91,6 @@ resource "local_file" "inventory" {
   for_each = local.config.WINDOWS_VIRTUAL_MACHINE
   content = templatefile("${path.module}/templates/inventory.tpl", {
     resource_group_name = module.resource_group.resource_group_name
-    admin_username      = each.value.admin_username
-    admin_password      = each.value.admin_password
   })
-  filename = "${path.module}/ansible/myazure_rm.yml"
+  filename = "${path.module}/ansible/inventory/myazure_rm.yml"
 }
