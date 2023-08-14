@@ -1,5 +1,5 @@
 {% set domain_controller_count = 1 | default(omit) -%}
-{% set windows_server_count = 1 | default(omit) -%}
+{% set windows_server_count = 0 | default(omit) -%}
 {% set windows_client_count = 1 | default(omit) -%}
 WINDOWS_VIRTUAL_MACHINE:
 {%- if domain_controller_count > 0 -%}
@@ -41,7 +41,7 @@ WINDOWS_VIRTUAL_MACHINE:
   windows_client:
     vm_instance_count: {{ windows_client_count  }}
     publisher: "MicrosoftWindowsDesktop"
-    offer: "windows10preview"
+    offer: "Windows-10"
     sku: "win10-22h2-ent"
     allow_extension_operations: true
     hotpatching_enabled: false
