@@ -47,4 +47,5 @@ locals {
       description                = "Allow Windows ATA from trusted IP"
     }
   ]
+  admin_password = var.admin_password == null ? random_password.admin_password[0].result : var.admin_password
 }

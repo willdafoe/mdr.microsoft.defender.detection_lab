@@ -1,55 +1,69 @@
 variable "enabled" {
-  type    = bool
-  default = true
+  description = "Enable or disable the Defender for Endpoint lab"
+  type        = bool
+  default     = true
 }
 
 variable "name" {
-  type = string
+  description = "Name of the Defender for Endpoint lab"
+  type        = string
 }
 
 variable "namespace" {
-  type = string
+  description = "Namespace of the Defender for Endpoint lab"
+  type        = string
 }
 
 variable "environment" {
-  default = null
+  description = "Environment of the Defender for Endpoint lab"
+  type        = string
+  default     = null
 }
 
 variable "stage" {
-  default = null
+  description = "Stage of the Defender for Endpoint lab"
+  type        = string
+  default     = null
 }
 
 variable "location" {
-  type = string
+  description = "Location of the Defender for Endpoint lab"
+  type        = string
 }
 
 variable "address_space" {
-  type    = string
-  default = "192.168.10.0/23"
+  description = "Address space of the Defender for Endpoint lab"
+  type        = string
+  default     = "192.168.10.0/23"
 }
 
 variable "subnet_count" {
-  type    = number
-  default = 1
+  description = "Number of subnets in the Defender for Endpoint lab"
+  type        = number
+  default     = 1
 }
 
 variable "max_subnet_count" {
-  type    = number
-  default = 0
+  description = "Maximum number of subnets in the Defender for Endpoint lab"
+  type        = number
+  default     = 0
 }
 
 variable "trusted_ip" {
-  type    = string
-  default = null
+  description = "Trusted IP address of the Defender for Endpoint lab"
+  type        = string
+  default     = null
 }
 
 variable "admin_username" {
-  type    = string
-  default = "sophosAdmin"
+  description = "Admin username of the Defender for Endpoint lab"
+  type        = string
+  default     = "sophosAdmin"
 }
 
 variable "admin_password" {
-  type      = string
-  default   = null
-  sensitive = true
+  description = "Admin password of the Defender for Endpoint lab"
+  type        = string
+  default     = null
+  sensitive   = true
 }

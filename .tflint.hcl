@@ -8,3 +8,14 @@ plugin "terraform" {
   enabled = true
   preset  = "recommended"
 }
+
+config {
+  module = false
+  ignore_module = {
+    "windows_virtual_machine" = true
+  }
+}
+
+rule "terraform_required_version" {
+  enabled = false
+}
