@@ -41,7 +41,7 @@ module "dynamic_subnets" {
 
 module "security_group" {
   source              = "app.terraform.io/mdr-team/security_group/azure"
-  version             = "1.0.1"
+  version             = "1.0.2"
   depends_on          = [module.resource_group]
   enabled             = var.enabled
   name                = var.name
@@ -49,7 +49,8 @@ module "security_group" {
   environment         = var.environment
   location            = var.location
   stage               = var.stage
-  trusted_ip          = var.trusted_ip
+  trusted_ip          = local.trusted_ip
+  trusted_ips         = local.trusted_ips
   resource_group_name = module.resource_group.resource_group_name
   security_rule       = local.security_rules
 }

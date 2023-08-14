@@ -28,7 +28,7 @@ WINDOWS_VIRTUAL_MACHINE:
     windows_client:
       vm_instance_count: 1
       publisher: "MicrosoftWindowsDesktop"
-      offer: "windows10preview"
+      offer: "Windows-10"
       sku: "win10-22h2-ent"
       allow_extension_operations: true
       hotpatching_enabled: false

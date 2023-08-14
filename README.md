@@ -23,7 +23,7 @@
 |------|--------|---------|
 | <a name="module_dynamic_subnets"></a> [dynamic\_subnets](#module\_dynamic\_subnets) | app.terraform.io/mdr-team/dynamic_subnets/azure | 1.0.1 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | app.terraform.io/mdr-team/resource_group/azure | 1.0.1 |
-| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | app.terraform.io/mdr-team/security_group/azure | 1.0.1 |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | app.terraform.io/mdr-team/security_group/azure | 1.0.2 |
 | <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | app.terraform.io/mdr-team/virtual_network/azure | 1.0.2 |
 | <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | app.terraform.io/mdr-team/windows_virtual_machine/azure | 1.0.2 |
 
@@ -48,9 +48,11 @@
 | <a name="input_max_subnet_count"></a> [max\_subnet\_count](#input\_max\_subnet\_count) | Maximum number of subnets in the Defender for Endpoint lab | `number` | `0` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the Defender for Endpoint lab | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace of the Defender for Endpoint lab | `string` | n/a | yes |
+| <a name="input_runner_ip"></a> [runner\_ip](#input\_runner\_ip) | If running via CI/CD, the IP address of the runner | `string` | `null` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stage of the Defender for Endpoint lab | `string` | `null` | no |
 | <a name="input_subnet_count"></a> [subnet\_count](#input\_subnet\_count) | Number of subnets in the Defender for Endpoint lab | `number` | `1` | no |
 | <a name="input_trusted_ip"></a> [trusted\_ip](#input\_trusted\_ip) | Trusted IP address of the Defender for Endpoint lab | `string` | `null` | no |
+| <a name="input_trusted_ips"></a> [trusted\_ips](#input\_trusted\_ips) | Trusted IP addresses of the Defender for Endpoint lab | `list(string)` | `[]` | no |
 
 ## Outputs
 
