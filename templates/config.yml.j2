@@ -1,5 +1,8 @@
+{%- set domain_controller_count = 1 | default(omit) -%}
+{%- set windows_server_count = 0 | default(omit) -%}
+{%- set windows_client_count = 1 | default(omit) -%}
 WINDOWS_VIRTUAL_MACHINE:
-{% if domain_controller_count > 0 %}
+{% if domain_controller_count > 0 -%}
   domain_controller:
     vm_instance_count: {{ domain_controller_count }}
     publisher: "MicrosoftWindowsServer"
@@ -13,8 +16,8 @@ WINDOWS_VIRTUAL_MACHINE:
     os_disk_size_gb: 128
     tags:
         role: "domain_controller"
-{% endif %}
-{% if windows_server_count > 0 %}
+{% endif -%}
+{% if windows_server_count > 0 -%}
   windows_server:
     vm_instance_count: {{ windows_server_count }}
     publisher: "MicrosoftWindowsServer"
@@ -28,8 +31,8 @@ WINDOWS_VIRTUAL_MACHINE:
     os_disk_size_gb: 128
     tags:
         role: "windows_server"
-{% endif %}
-{% if windows_client_count > 0 %}
+{% endif -%}
+{% if windows_client_count > 0 -%}
   windows_client:
     vm_instance_count: {{ windows_client_count  }}
     publisher: "MicrosoftWindowsDesktop"
@@ -43,4 +46,4 @@ WINDOWS_VIRTUAL_MACHINE:
     os_disk_size_gb: 128
     tags:
         role: "windows_client"
-{% endif %}
+{% endif -%}
