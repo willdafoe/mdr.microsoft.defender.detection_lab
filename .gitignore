@@ -47,5 +47,4 @@ terraform.rc
 **/collections/ansible_collections/*
 
 # Config file
-**config/config.yml
 **ansible/inventory/myazure_rm.yml
