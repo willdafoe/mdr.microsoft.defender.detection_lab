@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] terraform provisioning"
-  hosts: localhost
+  hosts: all
   gather_facts: false
   ignore_errors: true
   connection: local
@@ -19,10 +19,9 @@
       address_space: '{{ address_space }}'
 
   tasks:
-    - name: "[microsoft.defender.lab] generating configuration template"
-      ansible.builtin.template:
-        src: '{{ project_path }}/templates/config.yml.j2'
-        dest: '{{ project_path }}/config/config.yml'
+    - ansible.windows.win_ping:
+
+
 #    - block:        
 #        - name: "[ansible.playbook] running terraform plan"
 #          import_role:
