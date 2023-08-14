@@ -6,17 +6,6 @@
   connection: local
   collections:
     - sophos.mdr
-  vars:
-    terraform_variables:
-      name: '{{ name }}'
-      namespace: '{{ namespace }}'
-      environment: '{{ environment }}'
-      stage: '{{ stage }}'
-      admin_username: '{{ admin_username }}'
-      admin_password: '{{ admin_password }}'
-      trusted_ip: '{{ trusted_ip }}'
-      location: '{{ location }}'
-      address_space: '{{ address_space }}'
 
   tasks:
     - ansible.windows.win_ping:
