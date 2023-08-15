@@ -39,4 +39,5 @@ output "virtual_machine_credentials" {
     admin_username = var.admin_username
     admin_password = random_password.admin_password.result
   }
+  sensitive = true
 }
