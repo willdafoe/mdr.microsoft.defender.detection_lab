@@ -57,13 +57,14 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_admin_password"></a> [admin\_password](#output\_admin\_password) | n/a |
+| <a name="output_admin_username"></a> [admin\_username](#output\_admin\_username) | n/a |
 | <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | n/a |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | n/a |
 | <a name="output_subnet_address_prefixes"></a> [subnet\_address\_prefixes](#output\_subnet\_address\_prefixes) | n/a |
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | n/a |
 | <a name="output_subnet_name"></a> [subnet\_name](#output\_subnet\_name) | n/a |
-| <a name="output_virtual_machine_credentials"></a> [virtual\_machine\_credentials](#output\_virtual\_machine\_credentials) | n/a |
 | <a name="output_virtual_network_address_space"></a> [virtual\_network\_address\_space](#output\_virtual\_network\_address\_space) | n/a |
 | <a name="output_virtual_network_id"></a> [virtual\_network\_id](#output\_virtual\_network\_id) | n/a |
 | <a name="output_virtual_network_name"></a> [virtual\_network\_name](#output\_virtual\_network\_name) | n/a |
