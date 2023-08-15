@@ -34,6 +34,9 @@ output "security_group_id" {
   value = module.security_group.security_group_id
 }
 
-output "domain_controller_ip" {
-  value = module.windows_virtual_machine["domain_controller"].private_ip_address
+output "virtual_machine_credentials" {
+  value = {
+    admin_username = var.admin_username
+    admin_password = random_password.admin_password.result
+  }
 }

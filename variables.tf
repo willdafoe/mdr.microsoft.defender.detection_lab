@@ -72,10 +72,3 @@ variable "admin_username" {
   type        = string
   default     = "sophosAdmin"
 }
-
-variable "admin_password" {
-  description = "Admin password of the Defender for Endpoint lab"
-  type        = string
-  default     = null
-  sensitive   = true
-}

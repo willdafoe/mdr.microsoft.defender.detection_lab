@@ -62,14 +62,13 @@ resource "azurerm_subnet_network_security_group_association" "this" {
 }
 
 resource "random_password" "admin_password" {
-  count  = var.admin_password == null ? 1 : 0
   length = 16
 }
 
 module "windows_virtual_machine" {
   # tflint-ignore: null_value
   source              = "app.terraform.io/mdr-team/windows_virtual_machine/azure"
-  version             = "1.0.2"
+  version             = "1.0.3"
   for_each            = local.config.WINDOWS_VIRTUAL_MACHINE
   enabled             = var.enabled
   name                = var.name
@@ -84,7 +83,7 @@ module "windows_virtual_machine" {
   computer_name       = each.value.computer_name
   resource_group_name = module.resource_group.resource_group_name
   admin_username      = var.admin_username
-  admin_password      = local.admin_password
+  admin_password      = random_password.admin_password.result
   subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
   tags                = each.value.tags

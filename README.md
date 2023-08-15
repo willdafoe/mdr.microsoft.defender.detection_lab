@@ -25,7 +25,7 @@
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | app.terraform.io/mdr-team/resource_group/azure | 1.0.1 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | app.terraform.io/mdr-team/security_group/azure | 1.0.2 |
 | <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | app.terraform.io/mdr-team/virtual_network/azure | 1.0.2 |
-| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | app.terraform.io/mdr-team/windows_virtual_machine/azure | 1.0.2 |
+| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | app.terraform.io/mdr-team/windows_virtual_machine/azure | 1.0.3 |
 
 ## Resources
 
@@ -40,7 +40,6 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_address_space"></a> [address\_space](#input\_address\_space) | Address space of the Defender for Endpoint lab | `string` | `"192.168.10.0/23"` | no |
-| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | Admin password of the Defender for Endpoint lab | `string` | `null` | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | Admin username of the Defender for Endpoint lab | `string` | `"sophosAdmin"` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Enable or disable the Defender for Endpoint lab | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment of the Defender for Endpoint lab | `string` | `null` | no |
@@ -58,13 +57,13 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_domain_controller_ip"></a> [domain\_controller\_ip](#output\_domain\_controller\_ip) | n/a |
 | <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | n/a |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | n/a |
 | <a name="output_subnet_address_prefixes"></a> [subnet\_address\_prefixes](#output\_subnet\_address\_prefixes) | n/a |
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | n/a |
 | <a name="output_subnet_name"></a> [subnet\_name](#output\_subnet\_name) | n/a |
+| <a name="output_virtual_machine_credentials"></a> [virtual\_machine\_credentials](#output\_virtual\_machine\_credentials) | n/a |
 | <a name="output_virtual_network_address_space"></a> [virtual\_network\_address\_space](#output\_virtual\_network\_address\_space) | n/a |
 | <a name="output_virtual_network_id"></a> [virtual\_network\_id](#output\_virtual\_network\_id) | n/a |
 | <a name="output_virtual_network_name"></a> [virtual\_network\_name](#output\_virtual\_network\_name) | n/a |

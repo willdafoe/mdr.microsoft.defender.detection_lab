@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] terraform provisioning"
-  hosts: all
+  hosts: localhost
   gather_facts: false
   ignore_errors: true
   connection: local
@@ -8,8 +8,16 @@
     - sophos.mdr
 
   tasks:
-    - ansible.windows.win_ping:
-
+    - name: "[microsoft defender lab] getting admin_password"
+      block:
+        - ansible.builtin.shell:
+            chdir: "../test"
+            cmd: terraform output admin_password
+          register: _admin_password
+        
+        - ansible.builtin.set_fact:
+            admin_password: _admin_password
+      delegate_to: localhost
 
 #    - block:        
 #        - name: "[ansible.playbook] running terraform plan"
