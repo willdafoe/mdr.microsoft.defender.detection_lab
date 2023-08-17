@@ -68,7 +68,12 @@ variable "trusted_ips" {
 }
 
 variable "admin_username" {
-  description = "Admin username of the Defender for Endpoint lab"
+  description = "Admin username for the windows virtual machines"
   type        = string
-  default     = "sophosAdmin"
+}
+
+variable "admin_password" {
+  description = "Admin password for the windows virtual machines"
+  type        = string
+  sensitive   = true
 }

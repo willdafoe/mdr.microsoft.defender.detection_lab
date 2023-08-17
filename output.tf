@@ -1,44 +1,8 @@
-output "resource_group_id" {
-  value = module.resource_group.resource_group_id
-}
-
-output "resource_group_name" {
-  value = module.resource_group.resource_group_name
-}
-
-output "virtual_network_id" {
-  value = module.virtual_network.virtual_network_id
-}
-
-output "virtual_network_name" {
-  value = module.virtual_network.virtual_network_name
-}
-
-output "virtual_network_address_space" {
-  value = module.virtual_network.virtual_network_address_space
-}
-
-output "subnet_id" {
-  value = module.dynamic_subnets.subnet_id
-}
-
-output "subnet_name" {
-  value = module.dynamic_subnets.subnet_name
-}
-
-output "subnet_address_prefixes" {
-  value = module.dynamic_subnets.subnet_address_prefixes
-}
-
-output "security_group_id" {
-  value = module.security_group.security_group_id
-}
-
-output "admin_username" {
-  value = var.admin_username
-}
-
-output "admin_password" {
-  value     = random_password.admin_password.result
-  sensitive = true
+output "module_outputs" {
+  value = {
+    domain_controller_ip = !(lookup(local.config.WINDOWS_VIRTUAL_MACHINE, "domain_controller", null) == null) ? module.windows_virtual_machine["domain_controller"].public_ip_address : null
+    windows_server_ip    = !(lookup(local.config.WINDOWS_VIRTUAL_MACHINE, "windows_server", null) == null) ? module.windows_virtual_machine["windows_server"].public_ip_address : null
+    windows_client_ip    = !(lookup(local.config.WINDOWS_VIRTUAL_MACHINE, "windows_client", null) == null) ? module.windows_virtual_machine["windows_client"].public_ip_address : null
+    admin_username       = var.admin_username
+  }
 }

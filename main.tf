@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "./ansible/terraform.tfstate"
+  }
+}
+
 module "resource_group" {
   source      = "app.terraform.io/mdr-team/resource_group/azure"
   version     = "1.0.1"
@@ -61,10 +67,6 @@ resource "azurerm_subnet_network_security_group_association" "this" {
   network_security_group_id = module.security_group.security_group_id
 }
 
-resource "random_password" "admin_password" {
-  length = 16
-}
-
 module "windows_virtual_machine" {
   # tflint-ignore: null_value
   source              = "app.terraform.io/mdr-team/windows_virtual_machine/azure"
@@ -83,7 +85,7 @@ module "windows_virtual_machine" {
   computer_name       = each.value.computer_name
   resource_group_name = module.resource_group.resource_group_name
   admin_username      = var.admin_username
-  admin_password      = random_password.admin_password.result
+  admin_password      = var.admin_password
   subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
   tags                = each.value.tags
