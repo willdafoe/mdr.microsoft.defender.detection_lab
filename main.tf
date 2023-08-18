@@ -55,8 +55,8 @@ module "security_group" {
   environment         = var.environment
   location            = var.location
   stage               = var.stage
-  trusted_ip          = local.trusted_ip
-  trusted_ips         = local.trusted_ips
+  trusted_ip          = var.trusted_ip
+  trusted_ips         = !(var.trusted_ips == null) ? var.trusted_ips : null
   resource_group_name = module.resource_group.resource_group_name
   security_rule       = local.security_rules
 }

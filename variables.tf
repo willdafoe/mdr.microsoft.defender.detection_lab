@@ -55,12 +55,6 @@ variable "trusted_ip" {
   default     = null
 }
 
-variable "runner_ip" {
-  description = "If running via CI/CD, the IP address of the runner"
-  type        = string
-  default     = null
-}
-
 variable "trusted_ips" {
   description = "Trusted IP addresses of the Defender for Endpoint lab"
   type        = list(string)

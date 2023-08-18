@@ -46,7 +46,6 @@
 | <a name="input_max_subnet_count"></a> [max\_subnet\_count](#input\_max\_subnet\_count) | Maximum number of subnets in the Defender for Endpoint lab | `number` | `0` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the Defender for Endpoint lab | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace of the Defender for Endpoint lab | `string` | n/a | yes |
-| <a name="input_runner_ip"></a> [runner\_ip](#input\_runner\_ip) | If running via CI/CD, the IP address of the runner | `string` | `null` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stage of the Defender for Endpoint lab | `string` | `null` | no |
 | <a name="input_subnet_count"></a> [subnet\_count](#input\_subnet\_count) | Number of subnets in the Defender for Endpoint lab | `number` | `1` | no |
 | <a name="input_trusted_ip"></a> [trusted\_ip](#input\_trusted\_ip) | Trusted IP address of the Defender for Endpoint lab | `string` | `null` | no |

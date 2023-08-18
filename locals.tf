@@ -47,8 +47,4 @@ locals {
       description                = "Allow Windows ATA from trusted IP"
     }
   ]
-  runner_ip     = !(var.runner_ip == null) ? join("/", [var.runner_ip, "32"]) : null
-  use_runner_ip = var.trusted_ip == local.runner_ip ? false : true
-  trusted_ip    = local.use_runner_ip ? null : var.trusted_ip
-  trusted_ips   = local.use_runner_ip ? concat(var.trusted_ips, [local.runner_ip, var.trusted_ip]) : null
 }
