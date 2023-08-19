@@ -95,8 +95,6 @@ resource "local_file" "inventory" {
   for_each = local.config.WINDOWS_VIRTUAL_MACHINE
   content = templatefile("${path.module}/templates/inventory.tpl", {
     resource_group_name = module.resource_group.resource_group_name
-    admin_username      = var.admin_username
-    admin_password      = var.admin_password
   })
   filename = "${path.module}/ansible/inventory/myazure_rm.yml"
 }
