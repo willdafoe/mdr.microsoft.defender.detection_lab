@@ -3,14 +3,7 @@
   hosts: all
   gather_facts: false
   ignore_errors: true
-  vars:
-    ansible_user: '{{ admin_username }}'
-    ansible_password: '{{ admin_password }}'
-    ansible_connection: winrm
-    ansible_winrm_scheme: http
-    ansible_port: 5985
-    ansible_winrm_transport: ntlm
-    ansible_winrm_server_cert_validation: ignore
+
 
 
   tasks:

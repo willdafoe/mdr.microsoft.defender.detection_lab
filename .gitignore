@@ -48,3 +48,6 @@ terraform.rc
 
 # Config file
 **ansible/inventory/myazure_rm.yml
+
+#Azure Credentials File
+**credentials.json
