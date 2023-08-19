@@ -8,16 +8,9 @@
     - sophos.mdr
 
   tasks:
-    - name: "[microsoft defender lab] getting admin_password"
-      block:
-        - ansible.builtin.shell:
-            chdir: "../test"
-            cmd: terraform output admin_password
-          register: _admin_password
-        
-        - ansible.builtin.set_fact:
-            admin_password: _admin_password
-      delegate_to: localhost
+    - name: "[microsoft defender lab] windows ping"
+      win_ping:
+
 
 #    - block:        
 #        - name: "[ansible.playbook] running terraform plan"
