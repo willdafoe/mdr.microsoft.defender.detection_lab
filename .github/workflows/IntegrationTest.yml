@@ -34,6 +34,7 @@ jobs:
           fi              
       - name: Getting most recent artifact details
         id: runid
+        continue-on-error: true
         run: |
           base_uri="https://api.github.com"
           repo="${{ github.repository }}"
