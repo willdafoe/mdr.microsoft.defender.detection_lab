@@ -1,0 +1,76 @@
+name: Azure Integration Tests
+
+on:
+  push:
+
+jobs:
+  integration_test:
+    runs-on: ubuntu-latest
+    env:
+      template_file: ${{ github.workspace }}/templates/config.yml.j2
+      output_file: ${{ github.workspace }}/config/config.yml
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Generate configuration file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: ${{ env.template_file }}
+          output_file: ${{ env.output_file }}
+          variables: |
+            domain_controller_count=1
+            windows_server_count=1
+            windows_client_count=1
+      - id: runner_ip
+        run: |
+          RUNNER_IP=$(curl https://api.ipify.org)/32
+          if [ "$RUNNER_IP" ]; then
+            echo "runner_ip=${RUNNER_IP}" >>$GITHUB_OUTPUT
+          fi              
+      - name: Getting most recent artifact details
+        id: runid
+        run: |
+          base_uri="https://api.github.com"
+          repo="${{ github.repository }}"
+          artifacts_uri="$base_uri/repos/$repo/actions/artifacts"
+          token="${{ github.token }}"
+          api_response=$(curl -s -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $token" -H "X-GitHub-Api-Version: 2022-11-28" "$artifacts_uri")
+          sorted_artifacts=$(echo "$api_response" | jq --arg name "terraformstatefile" '.artifacts | map(select(.name == $name)) | sort_by(.created_at) | reverse')
+          most_recent=$(echo "$sorted_artifacts" | jq -r 'first(.[])')
+          RUN_ID=$(echo "$most_recent" | jq -r '.workflow_run.id')
+          if [ "$RUN_ID" ]; then
+            echo "run_id=${RUN_ID}" >>$GITHUB_OUTPUT
+          fi
+      - name: Terraform Init
+        id: init
+        run: |
+          terraform init
+      - name: Terraform Plan
+        id: plan
+        run: |
+          terraform plan -input=false -out=terraform.plan \
+          && terraform show -no-color terraform.plan
+        env:
+          TF_VAR_name: ${{ github.repository_owner }}
+          TF_VAR_namespace: ${{ github.ref_name }}
+          TF_VAR_environment: ${{ github.ref_type }}
+          TF_VAR_stage: ${{ github.run_id }}
+          TF_VAR_location: eastus
+          TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
+          TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
+          TF_VAR_trusted_ips: '[ "${{ secrets.TRUSTED_IP }}", "${{ steps.runner_ip.outputs.runner_ip }}" ]'
+      - name: Running Terraform Apply
+        id: apply
+        if: steps.plan.outcome == 'success'
+        run: | 
+          terraform apply \
+            -no-color \
+            -input=false \
+            terraform.plan          
+
+

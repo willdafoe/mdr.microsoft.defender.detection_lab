@@ -1,8 +1,8 @@
 plugin: azure.azcollection.azure_rm
 auth_source: credential_file
-client_id: '{{ azure_client_id }}'
-tenant: '{{ azure_tenant_id }}'
-subscription_id: '{{ azure_subscription_id }}'
+client_id: "37943fa3-bc2f-4253-b0a3-529c6f6342a3"
+tenant: "4f5e45fb-4db4-464a-a8d2-f72ee1494603"
+subscription_id: "3da7ef78-26b8-41b2-8af2-bcd75cb3ea12"
 
 include_vm_resource_groups:
     - ${ resource_group_name }
