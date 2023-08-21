@@ -13,6 +13,7 @@ module "resource_group" {
   environment = var.environment
   location    = var.location
   stage       = var.stage
+  tags        = local.tags
 }
 
 module "virtual_network" {
@@ -27,6 +28,7 @@ module "virtual_network" {
   stage               = var.stage
   resource_group_name = module.resource_group.resource_group_name
   address_space       = local.address_space
+  tags                = local.tags
 }
 
 module "dynamic_subnets" {
@@ -43,6 +45,7 @@ module "dynamic_subnets" {
   max_subnet_count    = var.max_subnet_count
   resource_group_name = module.resource_group.resource_group_name
   vnet_name           = module.virtual_network.virtual_network_name
+  tags                = local.tags
 }
 
 module "security_group" {
@@ -59,6 +62,7 @@ module "security_group" {
   trusted_ips         = !(var.trusted_ips == null) ? var.trusted_ips : null
   resource_group_name = module.resource_group.resource_group_name
   security_rule       = local.security_rules
+  tags                = local.tags
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
@@ -88,7 +92,10 @@ module "windows_virtual_machine" {
   admin_password      = var.admin_password
   subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
-  tags                = each.value.tags
+  tags = merge(
+    each.value.tags,
+    local.tags
+  )
 }
 
 resource "local_file" "inventory" {

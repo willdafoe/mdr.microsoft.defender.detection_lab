@@ -47,4 +47,7 @@ locals {
       description                = "Allow Windows ATA from trusted IP"
     }
   ]
+  tags = {
+    app_name = "microsoft defender"
+  }
 }

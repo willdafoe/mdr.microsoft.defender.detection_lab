@@ -16,3 +16,5 @@ keyed_groups:
       key: image.offer
     - prefix: role
       key: tags.role
+    - prefix: app_name
+      key: tags.app_name
