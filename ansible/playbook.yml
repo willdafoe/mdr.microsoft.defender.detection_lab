@@ -1,8 +1,11 @@
 ---
-- name: "[ansible.play] terraform provisioning"
-  hosts: windows_servers, windows_clients
+- name: "[ansible.play] configuring hosts"
+  hosts: all
   gather_facts: false
   ignore_errors: false
+  vars:
+    ansible_user: '{{ admin_username }}'
+    ansible_password: '{{ admin_password }}'
 
   tasks:
     - name: "[microsoft defender lab] windows ping"

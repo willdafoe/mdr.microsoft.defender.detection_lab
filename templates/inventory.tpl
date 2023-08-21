@@ -1,5 +1,5 @@
 plugin: azure.azcollection.azure_rm
-auth_source: cli
+auth_source: auto
 
 include_vm_resource_groups:
     - ${ resource_group_name }
