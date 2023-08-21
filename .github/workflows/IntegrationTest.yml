@@ -108,6 +108,11 @@ jobs:
             -no-color \
             -input=false \
             terraform.plan        
+      - name: Saving Terraform Statefile Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraformstatefile
+          path: ${{ env.project_path }}/ansible/terraform.tfstate            
       - uses: dawidd6/action-ansible-playbook@v2.6.1
         id: ansible
         env:
@@ -116,6 +121,7 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}        
         with:
+          playbook: playbook.yml
           directory: ${{ github.workspace }}/ansible
           requirements: requirements.yml
           options:
