@@ -1,6 +1,6 @@
 WINDOWS_VIRTUAL_MACHINE:
     domain_controller:
-      vm_instance_count: 2
+      vm_instance_count: 3
       publisher: "MicrosoftWindowsServer"
       offer: "WindowsServer"
       sku: "2016-Datacenter"

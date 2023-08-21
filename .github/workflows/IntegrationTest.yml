@@ -112,7 +112,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraformstatefile
-          path: ${{ env.project_path }}/ansible/terraform.tfstate            
+          path: ${{ github.workspace }}/ansible/terraform.tfstate            
       - uses: dawidd6/action-ansible-playbook@v2.6.1
         id: ansible
         env:
@@ -125,6 +125,7 @@ jobs:
           directory: ${{ github.workspace }}/ansible
           requirements: requirements.yml
           options:
+            -i ${{ github.workspace }}/ansible/inventory/myazure_rm.yml
             -e ansible_winrm_server_cert_validation=ignore
             -e ansible_winrm_transport=ntlm
             -e ansible_port=5985

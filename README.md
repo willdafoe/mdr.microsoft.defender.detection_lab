@@ -55,5 +55,7 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_module_outputs"></a> [module\_outputs](#output\_module\_outputs) | n/a |
+| <a name="output_domain_controller_public_ip"></a> [domain\_controller\_public\_ip](#output\_domain\_controller\_public\_ip) | n/a |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
+| <a name="output_virtual_network_name"></a> [virtual\_network\_name](#output\_virtual\_network\_name) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
