@@ -12,7 +12,27 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3         
+      - name: Login to Azure
+        id: az_logon
+        uses: azure/login@v1
+        continue-on-error: true
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}  
+#          creds: |
+#            '{ 
+#                "appId": "${{ secrets.AZURE_CLIENT_ID }}",
+#                "password": "${{ secrets.AZURE_CLIENT_SECRET }}",
+#                "tenant": "${{ secrets.AZURE_TENANT_ID }}",
+#                "subscription": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+#            }'   
+      - name: Azure CLI Action
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+            az account show   
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -47,6 +67,18 @@ jobs:
           if [ "$RUN_ID" ]; then
             echo "run_id=${RUN_ID}" >>$GITHUB_OUTPUT
           fi
+      - name: Download statefile if present
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        continue-on-error: true
+        with:
+          github_token: ${{ github.token }}
+          workflow: integrationTest.yml
+          workflow_conclusion: success
+          run_id: ${{ steps.runid.outputs.run_id }}
+          name: terraformstatefile
+          path: ${{ github.workspace }}/ansible/
+          if_no_artifact_found: warn
       - name: Terraform Init
         id: init
         run: |
@@ -72,6 +104,27 @@ jobs:
           terraform apply \
             -no-color \
             -input=false \
-            terraform.plan          
+            terraform.plan        
+      - uses: dawidd6/action-ansible-playbook@v2.6.1
+        id: ansible
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}        
+        with:
+          directory: ${{ github.workspace }}/ansible
+          requirements: requirements.yml
+          options:
+            -e ansible_winrm_server_cert_validation=ignore
+            -e ansible_winrm_transport=ntlm
+            -e ansible_port=5985
+            -e ansible_winrm_scheme=http
+            -e ansible_connection=winrm
+            -e admin_username=${{ github.event.inputs.admin_password }}
+            -e admin_password=${{ github.event.inputs.admin_password }}
+            -vvv  
+
+
 
 
