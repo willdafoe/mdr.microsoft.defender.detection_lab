@@ -1,5 +1,8 @@
 name: Azure Integration Tests
 
+permissions:
+  id-token: write
+  contents: read
 on:
   push:
 
