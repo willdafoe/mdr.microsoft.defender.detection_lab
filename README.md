@@ -24,7 +24,7 @@
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | app.terraform.io/mdr-team/resource_group/azure | 1.0.1 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | app.terraform.io/mdr-team/security_group/azure | 1.0.2 |
 | <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | app.terraform.io/mdr-team/virtual_network/azure | 1.0.2 |
-| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | app.terraform.io/mdr-team/windows_virtual_machine/azure | 1.0.3 |
+| <a name="module_windows_virtual_machine"></a> [windows\_virtual\_machine](#module\_windows\_virtual\_machine) | app.terraform.io/mdr-team/windows_virtual_machine/azure | 1.0.4 |
 
 ## Resources
 

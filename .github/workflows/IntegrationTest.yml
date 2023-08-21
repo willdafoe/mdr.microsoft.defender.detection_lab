@@ -125,7 +125,7 @@ jobs:
           directory: ${{ github.workspace }}/ansible
           requirements: requirements.yml
           options:
-            -i ${{ github.workspace }}/ansible/inventory/myazure_rm.yml
+            -i ./inventory/myazure_rm.yml
             -e ansible_winrm_server_cert_validation=ignore
             -e ansible_winrm_transport=ntlm
             -e ansible_port=5985
