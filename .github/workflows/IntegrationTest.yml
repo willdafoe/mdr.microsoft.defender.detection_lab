@@ -134,9 +134,8 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          pwd \
-          && ls -lah \
-          && echo "Current AZ user: $(az account show --query user.name -o tsv)" 
+          echo "Current AZ user: $(az account show --query user.name -o tsv)" \
+          && ansible-galaxy collection list
 
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
