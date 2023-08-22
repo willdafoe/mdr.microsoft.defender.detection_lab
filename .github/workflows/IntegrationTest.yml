@@ -136,10 +136,7 @@ jobs:
         run: |
           pwd \
           && ls -lah \
-          && ansible-galaxy collection list \
-          && echo "Current AZ user: $(az account show --query user.name -o tsv)"
-          && az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID \
-          && az account show
+          && echo "Current AZ user: $(az account show --query user.name -o tsv)" 
 
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
