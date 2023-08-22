@@ -134,7 +134,7 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          ansible-inventory -i ./inventory/myazure_rm.yml --list -vvv
+          python --version
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
 #            -e ansible_winrm_server_cert_validation=ignore \
