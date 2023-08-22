@@ -127,14 +127,14 @@ jobs:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate            
       - id: ansible
+        working-directory: ${{ github.workspace }}/ansible
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          cd ./ansible
-          && ansible-playbook -i ./inventory/myazure_rm.yml \
+          ansible-playbook -i ./inventory/myazure_rm.yml \
             -e ansible_winrm_server_cert_validation=ignore
             -e ansible_winrm_transport=ntlm
             -e ansible_port=5985
