@@ -82,7 +82,7 @@ jobs:
                   status_code=$(echo "$download" | grep -o "http_response:[0-9]\+" | cut -d ':' -f 2)
                   if [ "$status_code" -eq 200 ]; then
                       echo "Statefile artifact downloaded! Extracting contents..."
-                      unzip -o "./terraformstatefile.zip" -d "../../ansible/"
+                      unzip -o "./terraformstatefile.zip"
                   else
                       echo "Error: $status_code"
                       exit 1
@@ -125,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraformstatefile
-          path: ${{ github.workspace }}/ansible/terraform.tfstate            
+          path: ${{ github.workspace }}/terraform.tfstate            
       - id: ansible
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}

@@ -1,9 +1,3 @@
-terraform {
-  backend "local" {
-    path = "./ansible/terraform.tfstate"
-  }
-}
-
 module "resource_group" {
   source      = "app.terraform.io/mdr-team/resource_group/azure"
   version     = "1.0.1"
