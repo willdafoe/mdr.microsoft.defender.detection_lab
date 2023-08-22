@@ -137,7 +137,8 @@ jobs:
           pwd \
           && ls -lah \
           && ansible-galaxy collection list \
-          && ansible-inventory --list
+          && az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID \
+          && az account show
 
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
