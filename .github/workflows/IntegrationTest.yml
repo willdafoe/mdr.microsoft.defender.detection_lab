@@ -138,7 +138,7 @@ jobs:
           requirements_file="./requirements-azure.txt"
 
           if test -f "$requirements_file"; then
-            ./scripts/pipreqs.py "$requirements_file"
+            ./.github/workflows/scripts/pipreqs.py "$requirements_file"
           else
             echo "Requirements file not found!"
             exit 1
