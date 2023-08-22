@@ -13,9 +13,19 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3
-      - id: ansible-version
+      - id: ansible
+        working-directory: ${{ github.workspace }}/ansible
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}       
+          ANSIBLE_HOSTS: ${{ github.workspace }}/collections/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py
         run: |
-          ansible --version
+          source /opt/pipx/venvs/ansible-core/bin/activate \
+          && ansible-galaxy install -r requirements.yml \
+          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
+          && ansible-inventory -i inventory/myazure_rm.yml --list
 #      - uses: dawidd6/action-ansible-playbook@v2.6.1
 #        id: ansible
 #        with:
