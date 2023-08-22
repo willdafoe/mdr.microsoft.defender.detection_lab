@@ -137,7 +137,7 @@ jobs:
           pwd \
           && ls -lah \
           && ansible-galaxy collection list \
-          && cat playbook.yml
+          && ansible-inventory --list
 
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
