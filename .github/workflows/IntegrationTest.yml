@@ -135,10 +135,10 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
           curl -O https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt \
-          pip install -r requirements-azure.txt \
-          rm requirements-azure.txt \
-          ansible-galaxy collection install azure.azcollection \
-          ansible-inventory -i ./inventory/myazure_rm.yml --list \
+          && pip install -r requirements-azure.txt \
+          && rm requirements-azure.txt \
+          && ansible-galaxy collection install azure.azcollection \
+          && ansible-inventory -i ./inventory/myazure_rm.yml --list \
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
 #            -e ansible_winrm_server_cert_validation=ignore \
