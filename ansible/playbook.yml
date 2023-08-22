@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] configuring hosts"
-  hosts: localhost
+  hosts: all
   gather_facts: false
   ignore_errors: false
   collections:
