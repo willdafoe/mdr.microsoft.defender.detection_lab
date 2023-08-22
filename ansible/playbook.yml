@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] configuring hosts"
-  hosts: all
+  hosts: localhost
   gather_facts: false
   ignore_errors: false
   collections:
@@ -10,8 +10,17 @@
     ansible_password: '{{ admin_password }}'
 
   tasks:
-    - name: "[microsoft defender lab] windows ping"
-      win_ping:
+    - name: "[microsoft defender lab] install python pip requirements for azurerm"
+      ansible.builtin.pip:
+        requirements: "{{playbook_dir}}/collections/ansible_collections/azure/azcollection/requirements-azure.txt"
+      register: _pip_requirements
+      delegate_to: localhost
+    
+    - ansible.builtin.debug:
+        msg: '{{ _pip_requirements }}'
+      delegate_to: localhost
+    #- name: "[microsoft defender lab] windows ping"
+    #  win_ping:
 
 
 #    - block:        

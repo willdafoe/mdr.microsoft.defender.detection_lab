@@ -4,7 +4,8 @@ permissions:
   id-token: write
   contents: read
 on:
-  push:
+  #push:
+  workflow_dispatch:
 
 env:
   ANSIBLE_COLLECTIONS_PATHS: ${{ github.workspace }}/ansible/collections

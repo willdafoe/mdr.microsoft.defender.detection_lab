@@ -13,11 +13,14 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3
-      - uses: dawidd6/action-ansible-playbook@v2.6.1
-        id: ansible
-        with:
-          playbook: playbook.yml
-          directory: ${{ github.workspace }}/ansible
-          options:
-            --verbose        
+      - id: ansible-version
+        run: |
+          ansible --version
+#      - uses: dawidd6/action-ansible-playbook@v2.6.1
+#        id: ansible
+#        with:
+#          playbook: playbook.yml
+#          directory: ${{ github.workspace }}/ansible
+#          options:
+#            --verbose        
       
