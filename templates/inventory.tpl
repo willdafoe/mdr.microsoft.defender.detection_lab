@@ -1,3 +1,5 @@
+vars:
+  ansible_python_interpreter: /usr/bin/python3
 plugin: azure_rm
 auth_source: auto
 
