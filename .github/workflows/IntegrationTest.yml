@@ -134,14 +134,15 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          ansible-galaxy install -r requirements.yml \
-          && ansible-playbook -i ./inventory/myazure_rm.yml \
-            -e ansible_winrm_server_cert_validation=ignore \
-            -e ansible_winrm_transport=ntlm \
-            -e ansible_port=5985 \
-            -e ansible_winrm_scheme=http \
-            -e ansible_connection=winrm \
-            -e admin_username=${{ secrets.ADMIN_USERNAME }} \
-            -e admin_password=${{ secrets.ADMIN_PASSWORD }} \
-            --verbose \
-            playbook.yml
+          pwd
+#          ansible-galaxy install -r requirements.yml \
+#          && ansible-playbook -i ./inventory/myazure_rm.yml \
+#            -e ansible_winrm_server_cert_validation=ignore \
+#            -e ansible_winrm_transport=ntlm \
+#            -e ansible_port=5985 \
+#            -e ansible_winrm_scheme=http \
+#            -e ansible_connection=winrm \
+#            -e admin_username=${{ secrets.ADMIN_USERNAME }} \
+#            -e admin_password=${{ secrets.ADMIN_PASSWORD }} \
+#            --verbose \
+#            playbook.yml
