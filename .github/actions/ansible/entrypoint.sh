@@ -71,8 +71,8 @@ else
     if [  -z "$INPUT_GALAXYGITHUBUSER" ]
     then
       echo "\$INPUT_GALAXYGITHUBTOKEN and \$INPUT_GALAXYGITHUBUSER are set. Will substitue \$GALAXYGITHUBUSER and \$GALAXYGITHUBTOKEN in \$REQUIREMENTSFILE."
-      envsubst < "${INPUT_REQUIREMENTSFILE}" > "$(dirname "${INPUT_REQUIREMENTSFILE}")/substituted_requirements.yml"
-      export REQUIREMENTS="$(dirname "${INPUT_REQUIREMENTSFILE}")/substituted_requirements.yml"
+      envsubst < ${INPUT_REQUIREMENTSFILE} > $(dirname "${INPUT_REQUIREMENTSFILE}")/substituted_requirements.yml
+      export REQUIREMENTS=$(dirname "${INPUT_REQUIREMENTSFILE}")/substituted_requirements.yml
     else
       echo "\$INPUT_GALAXYTOKEN is set. Will login to Ansible Galaxy."
       ansible-galaxy login --github-token "${INPUT_GALAXYGITHUBTOKEN}" "${VERBOSITY}"

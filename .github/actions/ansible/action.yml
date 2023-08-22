@@ -1,5 +1,5 @@
 name: 'Execute Ansible Playbook'
-author: 'Patrick Pötz'
+author: 'Ralph Brynard'
 description: 'Executes an Ansible Playbook as Github Action'
 inputs:
   playbookName:
