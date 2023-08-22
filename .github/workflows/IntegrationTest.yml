@@ -127,7 +127,7 @@ jobs:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate            
       - id: ansible
-        uses: saubermacherag/ansible-playbook-docker-action@v1.4
+        uses: ./.github/actions/ansible
         with:
           playbookName: ${{ github.workspace }}/ansible/playbook.yml
           inventoryFile: ${{ github.workspace }}/ansible/inventory/myazure_rm.yml
