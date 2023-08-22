@@ -136,7 +136,9 @@ jobs:
         run: |
           pwd \
           && ls -lah \
-          ansible-galaxy collection list
+          && ansible-galaxy collection list \
+          && cat playbook.yml
+
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
 #            -e ansible_winrm_server_cert_validation=ignore \
