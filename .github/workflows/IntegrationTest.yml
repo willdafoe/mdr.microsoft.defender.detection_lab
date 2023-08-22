@@ -4,15 +4,9 @@ permissions:
   id-token: write
   contents: read
 on:
-  #push:
-  workflow_dispatch:
+  push:
 
 env:
-  ANSIBLE_COLLECTIONS_PATHS: ${{ github.workspace }}/ansible/collections
-  ANSIBLE_STDOUT_CALLBACK: unixy
-  ANSIBLE_LOAD_CALLBACK_PLUGINS: True
-  ANSIBLE_FORCE_COLOR: False
-  ANSIBLE_INVENTORY_ENABLED: azure.azcollection.azure_rm
   NAMESPACE: "microsoft defender"
   STAGE: "IntegrationTest"
   ENVIRONMENT: "dev"
@@ -132,19 +126,15 @@ jobs:
         with:
           name: terraformstatefile
           path: ${{ github.workspace }}/ansible/terraform.tfstate            
-      - uses: dawidd6/action-ansible-playbook@v2.6.1
-        id: ansible
+      - id: ansible
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}        
-        with:
-          playbook: playbook.yml
-          directory: ${{ github.workspace }}/ansible
-          requirements: requirements.yml
-          options:
-            -i ${{ github.workspace }}/ansible/inventory/myazure_rm.yml
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
+        run: |
+          cd ./ansible
+          && ansible-playbook -i ./inventory/myazure_rm.yml \
             -e ansible_winrm_server_cert_validation=ignore
             -e ansible_winrm_transport=ntlm
             -e ansible_port=5985
@@ -152,8 +142,5 @@ jobs:
             -e ansible_connection=winrm
             -e admin_username=${{ secrets.ADMIN_USERNAME }}
             -e admin_password=${{ secrets.ADMIN_PASSWORD }}
-            -vvv  
-
-
-
-
+            --verbose \
+            playbook.yml
