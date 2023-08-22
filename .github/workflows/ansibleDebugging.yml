@@ -2,6 +2,7 @@ name: Ansible Debugging
 
 on:
   push:
+  workflow_dispatch:
 
 
 jobs:
