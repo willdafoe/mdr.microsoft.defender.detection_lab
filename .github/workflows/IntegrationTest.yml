@@ -134,5 +134,5 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          source /opt/pipx/venvs/ansible-core/bin/activate \
-          && ansible-inventory -i inventory/myazure_rm.yml --list
+          pip=$(which pip3)
+          echo $pip
