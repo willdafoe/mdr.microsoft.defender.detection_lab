@@ -134,7 +134,12 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          pip=$(which pip3)
-          echo $pip
-          azure_requirements=$(curl https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt -o requirements-azure.txt)
-          $pip install -r requirements-azure.txt
+          requirements=$(curl "https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt" -o ./requirements-azure.txt)
+          requirements_file="./requirements-azure.txt"
+
+          if test -f "$requirements_file"; then
+            ./scripts/pipreqs.py "$requirements_file"
+          else
+            echo "Requirements file not found!"
+            exit 1
+          fi
