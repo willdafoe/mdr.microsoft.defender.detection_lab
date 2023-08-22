@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  ANSIBLE_COLLECTIONS_PATHS: ${{ github.workspace }}/ansible/collections
+  ANSIBLE_CONFIG_FILE: ${{ github.workspace }}/ansible/ansible.cfg
 
 jobs:
   ansible_debugging:
