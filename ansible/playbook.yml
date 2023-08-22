@@ -3,9 +3,9 @@
   hosts: localhost
   gather_facts: false
   ignore_errors: false
-  vars:
-    ansible_user: '{{ admin_username }}'
-    ansible_password: '{{ admin_password }}'
+  #vars:
+    #ansible_user: '{{ admin_username }}'
+    #ansible_password: '{{ admin_password }}'
 
   tasks:
     - name: "debugging ansible vars"
