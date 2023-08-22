@@ -127,26 +127,21 @@ jobs:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate            
       - id: ansible
-        working-directory: ${{ github.workspace }}/ansible
-        env:
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
-        run: |
-          curl -O https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt \
-          && pip install -r requirements-azure.txt \
-          && rm requirements-azure.txt \
-          && ansible-galaxy collection install azure.azcollection \
-          && ansible-inventory -i ./inventory/myazure_rm.yml --list \
-#          ansible-galaxy install -r requirements.yml \
-#          && ansible-playbook -i ./inventory/myazure_rm.yml \
-#            -e ansible_winrm_server_cert_validation=ignore \
-#            -e ansible_winrm_transport=ntlm \
-#            -e ansible_port=5985 \
-#            -e ansible_winrm_scheme=http \
-#            -e ansible_connection=winrm \
-#            -e admin_username=${{ secrets.ADMIN_USERNAME }} \
-#            -e admin_password=${{ secrets.ADMIN_PASSWORD }} \
-#            --verbose \
-#            playbook.yml
+        uses: saubermacherag/ansible-playbook-docker-action@v1.4
+        with:
+          playbookName: ${{ github.workspace }}/ansible/playbook.yml
+          inventoryFile: ${{ github.workspace }}/ansible/inventory/myazure_rm.yml
+          requirementsFile: ${{ github.workspace }}/ansible/requirements.yml
+          extraVars: |
+            -e ansible_winrm_server_cert_validation=ignore 
+            -e ansible_winrm_transport=ntlm 
+            -e ansible_port=5985 
+            -e ansible_winrm_scheme=http 
+            -e ansible_connection=winrm 
+            -e admin_username=${{ secrets.ADMIN_USERNAME }} 
+            -e admin_password=${{ secrets.ADMIN_PASSWORD }} 
+            -e AZURE_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+            -e AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
+            -e AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }} 
+            -e AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }} 
+          verbosity: "vvv"
