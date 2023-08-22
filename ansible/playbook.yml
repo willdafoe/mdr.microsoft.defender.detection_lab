@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] configuring hosts"
-  hosts: all
+  hosts: localhost
   gather_facts: false
   ignore_errors: false
   vars:
@@ -8,8 +8,15 @@
     ansible_password: '{{ admin_password }}'
 
   tasks:
-    - name: "[microsoft defender lab] windows ping"
-      win_ping:
+    - name: "debugging ansible vars"
+      debug:
+        mvar: item
+      with_items:
+        - '{{ ANSIBLE_COLLECTIONS_PATHS }}'
+
+      
+    #- name: "[microsoft defender lab] windows ping"
+    #  win_ping:
 
 
 #    - block:        

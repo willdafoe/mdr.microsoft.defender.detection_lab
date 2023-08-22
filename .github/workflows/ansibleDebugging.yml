@@ -1,0 +1,20 @@
+name: Ansible Debugging
+
+on:
+  push:
+
+
+jobs:
+  ansible_debugging:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        uses: actions/checkout@v3
+      - uses: dawidd6/action-ansible-playbook@v2.6.1
+        id: ansible
+        with:
+          playbook: playbook.yml
+          directory: ${{ github.workspace }}
+          options:
+            --verbose        
+      
