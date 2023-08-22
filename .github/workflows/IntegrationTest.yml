@@ -134,8 +134,11 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          whoami \
-          && ansible-inventory -i ./inventory/myazure_rm.yml --list
+          curl -O https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt \
+          pip install -r requirements-azure.txt \
+          rm requirements-azure.txt \
+          ansible-galaxy collection install azure.azcollection \
+          ansible-inventory -i ./inventory/myazure_rm.yml --list \
 #          ansible-galaxy install -r requirements.yml \
 #          && ansible-playbook -i ./inventory/myazure_rm.yml \
 #            -e ansible_winrm_server_cert_validation=ignore \
