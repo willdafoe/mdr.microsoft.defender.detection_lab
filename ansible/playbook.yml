@@ -10,9 +10,7 @@
   tasks:
     - name: "debugging ansible vars"
       debug:
-        mvar: item
-      with_items:
-        - '{{ ANSIBLE_COLLECTIONS_PATHS }}'
+        mmsg: "'{{ lookup('ansible.builtin.env', 'ANSIBLE_COLLECTIONS_PATHS') }}'"
 
       
     #- name: "[microsoft defender lab] windows ping"
