@@ -1,22 +1,15 @@
 ---
 - name: "[ansible.play] configuring hosts"
-  hosts: localhost
+  hosts: all
   gather_facts: false
   ignore_errors: false
-  #vars:
-    #ansible_user: '{{ admin_username }}'
-    #ansible_password: '{{ admin_password }}'
+  vars:
+    ansible_user: '{{ admin_username }}'
+    ansible_password: '{{ admin_password }}'
 
   tasks:
-    - name: "debugging ansible vars"
-      debug:
-        msg: "'{{ lookup('ansible.builtin.env', item ) }}'"
-      with_items:
-        - ANSIBLE_COLLECTIONS_PATHS
-        - ANSIBLE_CONFIG_FILE
-      
-    #- name: "[microsoft defender lab] windows ping"
-    #  win_ping:
+    - name: "[microsoft defender lab] windows ping"
+      win_ping:
 
 
 #    - block:        
