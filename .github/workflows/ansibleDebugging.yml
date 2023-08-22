@@ -22,7 +22,12 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}       
           ANSIBLE_HOSTS: ${{ github.workspace }}/collections/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py
         run: |
-          ansible --version
+          apt update \
+          && apt -y install software-properties-common \
+          && add-apt-repository --yes --update ppa:ansible/ansible \
+          && apt -y install ansible \
+          && ansible --version
+
 #          source /opt/pipx/venvs/ansible-core/bin/activate \
 #          && ansible-galaxy install -r requirements.yml \
 #          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \

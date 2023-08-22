@@ -135,6 +135,4 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
           source /opt/pipx/venvs/ansible-core/bin/activate \
-          && ansible-galaxy install -r requirements.yml \
-          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
           && ansible-inventory -i inventory/myazure_rm.yml --list
