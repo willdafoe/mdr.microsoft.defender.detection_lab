@@ -12,7 +12,8 @@ env:
   ANSIBLE_LOAD_CALLBACK_PLUGINS: True
   ANSIBLE_FORCE_COLOR: False
   ANSIBLE_INVENTORY_ENABLED: azure.azcollection.azure_rm
-  STAGE: ${{ github.ref_name }}
+  NAMESPACE: "microsoft defender"
+  STAGE: "IntegrationTest"
   ENVIRONMENT: "dev"
 
 
@@ -110,7 +111,7 @@ jobs:
           && terraform show -no-color terraform.plan
         env:
           TF_VAR_name: ${{ github.repository_owner }}
-          TF_VAR_namespace: ${{ github.event }}
+          TF_VAR_namespace: ${{ env.NAMESPACE }}
           TF_VAR_environment: ${{ env.ENVIRONMENT }}
           TF_VAR_stage: ${{ env.STAGE }}
           TF_VAR_location: eastus
