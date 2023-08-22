@@ -136,3 +136,5 @@ jobs:
         run: |
           pip=$(which pip3)
           echo $pip
+          azure_requirements=$(curl https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt -o requirements-azure.txt)
+          $pip install -r requirements-azure.txt
