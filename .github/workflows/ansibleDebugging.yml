@@ -22,10 +22,11 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}       
           ANSIBLE_HOSTS: ${{ github.workspace }}/collections/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py
         run: |
-          source /opt/pipx/venvs/ansible-core/bin/activate \
-          && ansible-galaxy install -r requirements.yml \
-          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
-          && ansible-inventory -i inventory/myazure_rm.yml --list
+          ansible --version
+#          source /opt/pipx/venvs/ansible-core/bin/activate \
+#          && ansible-galaxy install -r requirements.yml \
+#          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
+#          && ansible-inventory -i inventory/myazure_rm.yml --list
 #      - uses: dawidd6/action-ansible-playbook@v2.6.1
 #        id: ansible
 #        with:
