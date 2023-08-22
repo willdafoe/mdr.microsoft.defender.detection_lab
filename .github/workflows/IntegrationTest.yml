@@ -4,8 +4,15 @@ permissions:
   id-token: write
   contents: read
 on:
- # push:
- workflow_dispatch:
+  push:
+
+env:
+  ANSIBLE_COLLECTIONS_PATHS: ${{ github.workspace }}/ansible/collections
+  ANSIBLE_STDOUT_CALLBACK: unixy
+  ANSIBLE_LOAD_CALLBACK_PLUGINS: True
+  ANSIBLE_FORCE_COLOR: False
+  ANSIBLE_INVENTORY_ENABLED: azure.azcollection.azure_rm
+
 
 jobs:
   integration_test:
@@ -25,13 +32,6 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}  
-      - name: Setup Python
-        uses: actions/setup-python@v4.7.0
-        with:
-          python-version: '3.10'
-      - id: dependencies
-        run: |
-          pip install -r requirements.txt
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
