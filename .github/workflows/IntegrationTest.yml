@@ -64,7 +64,7 @@ jobs:
           base_uri="https://api.github.com"
           repo="${{ github.repository }}"
           artifacts_uri="$base_uri/repos/$repo/actions/artifacts"
-          token="${{ github.token }}"
+          token="${{ steps.generate_token.outputs.token }}"
           api_response=$(curl -s -L -w "http_response:%{http_code}" \
               -H "Authorization: Bearer $token" \
               "$artifacts_uri")
@@ -146,8 +146,8 @@ jobs:
             -e ansible_port=5985
             -e ansible_winrm_scheme=http
             -e ansible_connection=winrm
-            -e admin_username=${{ github.event.inputs.admin_password }}
-            -e admin_password=${{ github.event.inputs.admin_password }}
+            -e admin_username=${{ secrets.ADMIN_USERNAME }}
+            -e admin_password=${{ secrets.ADMIN_PASSWORD }}
             -vvv  
 
 
