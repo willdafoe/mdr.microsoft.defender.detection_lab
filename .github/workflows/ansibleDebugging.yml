@@ -23,6 +23,15 @@ jobs:
         working-directory: ${{ github.workspace }}/ansible
         run: |
           source /opt/pipx/venvs/ansible-core/bin/activate \
-          && echo "$VIRTUAL_ENV"
+          && echo "venv=$VIRTUAL_ENV" >>$GITHUB_OUTPUT
+      - id: galaxy
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          ansible-galaxy install -r requirements.yml --force
+      - id: inventory
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          ansible-inventory -i inventory/myazure_rm.yml --graph
+
 
       
