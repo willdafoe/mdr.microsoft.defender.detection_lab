@@ -1,7 +1,7 @@
 name: Ansible Debugging
 
 on:
- #push:
+  push:
 
 env:
   ANSIBLE_COLLECTIONS_PATHS: ${{ github.workspace }}/ansible/collections
