@@ -26,17 +26,14 @@ jobs:
           source /opt/pipx/venvs/ansible-core/bin/activate \
           && echo "venv=$(basename "$VIRTUAL_ENV")" >>$GITHUB_OUTPUT
       - id: galaxy
-        if: steps.source.outputs.venv == "ansible-core"
         working-directory: ${{ github.workspace }}/ansible
         run: |
           ansible-galaxy install -r requirements.yml --force
-      - id: pip
-        if: steps.source.outputs.venv == "ansible-core"      
+      - id: pip    
         working-directory: ${{ github.workspace }}/ansible
         run: |
           pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt
       - id: inventory
-        if: steps.source.outputs.venv == "ansible-core"      
         working-directory: ${{ github.workspace }}/ansible
         run: |
           ansible-inventory -vvv -i inventory/azure_rm.yml --graph
