@@ -20,17 +20,8 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3    
-      - id: galaxy
+      - id: ansible
         run: |
-          ansible-galaxy collection install -U azure.azcollection 
-      - id: pip
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt
-      - id: inventory
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          ansible-inventory -vvv -i inventory/azure_rm.yml --graph
-
+          ansible --version
 
       
