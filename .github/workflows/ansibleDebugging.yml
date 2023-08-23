@@ -17,26 +17,9 @@ jobs:
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     steps:
-      - id: checkout
-        uses: actions/checkout@v3
-      - name: Login to Azure
-        id: az_logon
-        uses: azure/login@v1
-        continue-on-error: true
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - id: galaxy-install
+      - id: ls
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy collection install -r requirements.yml --force \
-          && pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt
-      - id: azure_rm
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          ls /opt/pipx/venvs/ansible-core
-#          python3 -m pip install -r ./collections/ansible_collections/azure/#azcollection/requirements-azure.txt
-      - id: inventory
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          ansible-inventory -i inventory/azure_rm.yml --list
+          ls /opt/pipx/venvs/ansible-core/bin
+
       
