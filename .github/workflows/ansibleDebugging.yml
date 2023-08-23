@@ -23,6 +23,22 @@ jobs:
       - id: ansible
         run: |
           az_version=$(ansible-galaxy collection list azure.azcollection | grep azure.azcollection | awk '{print $2}')
-          echo "$az_version"
-
+          if [ "$az_version" -le "1.17.0" ]; then
+            echo "Installing Azure Collection"
+            ansible-galaxy collection install -U azure.azcollection
+          fi
+          ansible_windows_version=$(ansible-galaxy collection list ansible.windows | grep ansible.windows | awk '{print $2}')
+          if [ "$ansible_windows_version" -le "2.1.0" ]; then
+            echo "Installing Ansible Windows Collection"
+            ansible-galaxy collection install -U ansible.windows
+          fi
+          ansible_general_version=$(ansible-galaxy collection list community.general | grep community.general | awk '{print $2}')
+          if [ "$ansible_general_version" -le "7.3.0" ]; then
+            echo "Installing Ansible General Collection"
+            ansible-galaxy collection install -U community.general
+          fi
+      - id: cat
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          cat ./collections/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py
       
