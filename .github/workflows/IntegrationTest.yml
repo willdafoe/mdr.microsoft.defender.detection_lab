@@ -4,13 +4,25 @@ permissions:
   id-token: write
   contents: read
 on:
- # push:
-  workflow_dispatch:
+ push:
 
 env:
   NAMESPACE: "microsoft defender"
   STAGE: "IntegrationTest"
   ENVIRONMENT: "dev"
+  TF_VAR_name: ${{ github.repository_owner }}
+  TF_VAR_namespace: ${{ env.NAMESPACE }}
+  TF_VAR_environment: ${{ env.ENVIRONMENT }}
+  TF_VAR_stage: ${{ env.STAGE }}
+  TF_VAR_location: eastus
+  TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
+  TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
+  TF_VAR_trusted_ips: '[ "${{ secrets.TRUSTED_IP }}", "${{ steps.runner_ip.outputs.runner_ip }}" ]'  
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLOUD_ENVIRONMENT: "AzureCloud"  
 
 
 jobs:
@@ -105,15 +117,6 @@ jobs:
         run: |
           terraform plan -input=false -out=terraform.plan \
           && terraform show -no-color terraform.plan
-        env:
-          TF_VAR_name: ${{ github.repository_owner }}
-          TF_VAR_namespace: ${{ env.NAMESPACE }}
-          TF_VAR_environment: ${{ env.ENVIRONMENT }}
-          TF_VAR_stage: ${{ env.STAGE }}
-          TF_VAR_location: eastus
-          TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
-          TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
-          TF_VAR_trusted_ips: '[ "${{ secrets.TRUSTED_IP }}", "${{ steps.runner_ip.outputs.runner_ip }}" ]'
       - name: Running Terraform Apply
         id: apply
         if: steps.plan.outcome == 'success'
@@ -126,27 +129,25 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraformstatefile
-          path: ${{ github.workspace }}/terraform.tfstate      
-      - id: ansible-galaxy
+          path: ${{ github.workspace }}/terraform.tfstate   
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.0
+        with:
+          python-version: '3.10'
+      - id: pip
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy install -r requirements.yml --force
-      - id: collection-list
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          ansible-galaxy collection list
-      - id: install-az-requirements
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt  
-      - id: ansible-inventory
-        working-directory: ${{ github.workspace }}/ansible
-        env:
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
-        run: |
-          echo "Running Ansible Inventory"
-          ansible-inventory -i inventory/myazure_rm.yml --list
+          pipx inject ansible-core pywinrm requests-ntlm         
+      - name: Run Ansible playbook
+        uses: dawidd6/action-ansible-playbook@v2.6.1
+        with:
+          playbook: playbook.yml
+          inventory: ./inventory/azure_rm.yml
+          requirements: galaxy-requirements.yml
+          directory: ${{ github.workspace }}/ansible
+          options: |     
+            -e admin_username=${{ secrets.ADMIN_USERNAME }}
+            -e admin_password=${{ secrets.ADMIN_PASSWORD }}
+            --verbose              
+
 
