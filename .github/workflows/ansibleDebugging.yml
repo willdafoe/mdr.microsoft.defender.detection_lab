@@ -26,10 +26,10 @@ jobs:
           && add-apt-repository --yes --update ppa:ansible/ansible \
           && apt -y install ansible python3-pip\
           && ansible-galaxy install -r requirements.yml \
-          && curl "https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt" -o ./requirements-azure.txt \
-          && pip3 install -r requirements-azure.txt \
-          && ansible-galaxy collection install azure.azcollection --force \
-          && ansible-inventory -i inventory/myazure_rm.yml --list
+          && ansible-galaxy collection list | grep azure.azcollection 
+#          && pip3 install -r requirements-azure.txt \
+#          && ansible-galaxy collection install azure.azcollection --force \
+#          && ansible-inventory -i inventory/myazure_rm.yml --list
 
 
 #          source /opt/pipx/venvs/ansible-core/bin/activate \
