@@ -20,6 +20,9 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3    
+      - id: galaxy
+        run: |
+          ansible-galaxy install -U azure.azcollection 
       - id: inventory
         working-directory: ${{ github.workspace }}/ansible
         run: |
