@@ -1,0 +1,20 @@
+plugin: azure_rm
+auth_source: cli
+
+include_vm_resource_groups:
+    - "*"
+
+conditional_groups:
+    all: true
+    windows_servers: "'MicrosoftWindowsServer' in image.publisher"
+    windows_clients: "'MicrosoftWindowsDesktop' in image.publisher"
+
+keyed_groups:
+    - prefix: location
+      key: location
+    - prefix: os
+      key: image.offer
+    - prefix: role
+      key: tags.role
+    - prefix: app_name
+      key: tags.app_name
