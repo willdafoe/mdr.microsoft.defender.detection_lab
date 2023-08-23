@@ -13,12 +13,6 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3
-      - name: Installing curl
-        run: |
-          apt -y install curl
-      - name: Installing Azure CLI
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | bash
       - name: Login to Azure
         id: az_logon
         uses: azure/login@v1
@@ -30,34 +24,4 @@ jobs:
               "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
               "subsciptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
               "tenantId": "${{ secrets.AZURE_TENANT_ID }}""
-            }    
-      - id: ansible
-        working-directory: ${{ github.workspace }}/ansible
-        env:
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}       
-        run: |
-          apt update \
-          && apt -y install software-properties-common \
-          && add-apt-repository --yes --update ppa:ansible/ansible \
-          && apt -y install ansible python3-pip\
-          && ansible-galaxy install -r requirements.yml \
-          && ansible-galaxy collection list | grep azure.azcollection \
-          && pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
-          && ansible-inventory -i inventory/myazure_rm.yml --list
-
-
-#          source /opt/pipx/venvs/ansible-core/bin/activate \
-#          && ansible-galaxy install -r requirements.yml \
-#          && python -m pip install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
-#          && ansible-inventory -i inventory/myazure_rm.yml --list
-#      - uses: dawidd6/action-ansible-playbook@v2.6.1
-#        id: ansible
-#        with:
-#          playbook: playbook.yml
-#          directory: ${{ github.workspace }}/ansible
-#          options:
-#            --verbose        
-      
+            }   
