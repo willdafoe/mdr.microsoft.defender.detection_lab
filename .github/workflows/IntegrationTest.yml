@@ -125,7 +125,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraformstatefile
-          path: ${{ github.workspace }}/terraform.tfstate            
+          path: ${{ github.workspace }}/terraform.tfstate      
+      - id: ansible-galaxy
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          ansible-galaxy install -r requirements.yml      
       - id: ansible
         working-directory: ${{ github.workspace }}/ansible
         env:
@@ -134,12 +138,6 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          requirements=$(curl "https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt" -o ./requirements-azure.txt)
-          requirements_file="./requirements-azure.txt"
+          ansible-galaxy collection install -r requirements.txt
+          ansible-galaxy collection list
 
-          if test -f "$requirements_file"; then
-            ./.github/workflows/scripts/pipreqs.py "$requirements_file"
-          else
-            echo "Requirements file not found!"
-            exit 1
-          fi

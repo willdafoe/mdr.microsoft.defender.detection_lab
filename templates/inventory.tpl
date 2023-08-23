@@ -1,7 +1,7 @@
 vars:
   ansible_python_interpreter: /usr/bin/python3
 plugin: azure_rm
-auth_source: auto
+auth_source: cli
 
 include_vm_resource_groups:
     - ${ resource_group_name }
