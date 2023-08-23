@@ -135,8 +135,9 @@ jobs:
         run: |
           ansible-galaxy collection list
       - id: install-az-requirements
+        working-directory: ${{ github.workspace }}/ansible
         run: |
-          pip3 install -r /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_collections/azure/azcollection/requirements-azure.txt  
+          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt  
       - id: ansible
         working-directory: ${{ github.workspace }}/ansible
         env:
