@@ -17,6 +17,8 @@ jobs:
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     steps:
+      - id: checkout
+        uses: actions/checkout@v3    
       - id: ls
         working-directory: ${{ github.workspace }}/ansible
         run: |
