@@ -18,4 +18,4 @@ jobs:
         uses: azure/login@v1
         continue-on-error: true
         with:
-          creds: '{ "appId": "${{ secrets.AZURE_CLIENT_ID }}","password": "${{ secrets.AZURE_CLIENT_SECRET }}", "tenant": "${{ secrets.AZURE_TENANT_ID }}""}'   
+          creds: ${{ secrets.AZURE_CREDENTIALS }} 
