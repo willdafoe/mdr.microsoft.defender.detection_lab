@@ -20,11 +20,6 @@ jobs:
     steps:
       - id: checkout
         uses: actions/checkout@v3    
-      - id: source
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          source /opt/pipx/venvs/ansible-inventory/bin/activate \
-          && echo "venv=$(basename "$VIRTUAL_ENV")" >>$GITHUB_OUTPUT
       - id: galaxy
         working-directory: ${{ github.workspace }}/ansible
         run: |
