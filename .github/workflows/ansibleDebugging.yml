@@ -23,6 +23,10 @@ jobs:
       - id: galaxy
         run: |
           ansible-galaxy collection install -U azure.azcollection 
+      - id: pip
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt
       - id: inventory
         working-directory: ${{ github.workspace }}/ansible
         run: |
