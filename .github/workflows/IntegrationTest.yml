@@ -126,10 +126,20 @@ jobs:
         with:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate      
+      - id: list
+        run: |
+          ls ./collections
       - id: ansible-galaxy
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy install -r requirements.yml      
+          ansible-galaxy install -r requirements.yml    
+      - id: collection-list
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          ansible-galaxy collection list
+      - id: install-az-requirements
+        run: |
+          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt  
       - id: ansible
         working-directory: ${{ github.workspace }}/ansible
         env:
@@ -138,6 +148,5 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          ansible-galaxy collection install -r requirements.yml
-          ansible-galaxy collection list
+          echo "Running Ansible Playbook"
 
