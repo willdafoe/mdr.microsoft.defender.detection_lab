@@ -138,7 +138,7 @@ jobs:
         working-directory: ${{ github.workspace }}/ansible
         run: |
           pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt  
-      - id: ansible
+      - id: ansible-inventory
         working-directory: ${{ github.workspace }}/ansible
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -146,5 +146,6 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}  
         run: |
-          echo "Running Ansible Playbook"
+          echo "Running Ansible Inventory"
+          ansible-inventory -i inventory/myazure_rm.yml --list
 

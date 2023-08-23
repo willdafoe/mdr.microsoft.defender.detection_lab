@@ -46,8 +46,7 @@ jobs:
           && ansible-galaxy install -r requirements.yml \
           && ansible-galaxy collection list | grep azure.azcollection \
           && pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt \
-#          && ansible-galaxy collection install azure.azcollection --force \
-#          && ansible-inventory -i inventory/myazure_rm.yml --list
+          && ansible-inventory -i inventory/myazure_rm.yml --list
 
 
 #          source /opt/pipx/venvs/ansible-core/bin/activate \
