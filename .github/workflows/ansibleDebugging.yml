@@ -31,7 +31,7 @@ jobs:
       - id: inventory
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-inventory -vvv -i inventory/myazure_rm.yml --graph
+          ansible-inventory -vvv -i inventory/azure_rm.yml --graph
 
 
       
