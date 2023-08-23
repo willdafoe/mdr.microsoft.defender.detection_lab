@@ -1,6 +1,6 @@
 ---
 - name: "[ansible.play] win_ping"
-  hosts: windows
+  hosts: all
   gather_facts: false
   ignore_errors: false
   vars:
