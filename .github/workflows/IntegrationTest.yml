@@ -126,21 +126,17 @@ jobs:
         with:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate      
-      - id: ls
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          ls -lah
       - id: ansible-galaxy
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy install -r requirements.yml    
+          ansible-galaxy install -r requirements.yml --force
       - id: collection-list
         working-directory: ${{ github.workspace }}/ansible
         run: |
           ansible-galaxy collection list
       - id: install-az-requirements
         run: |
-          pip3 install -r ./collections/ansible_collections/azure/azcollection/requirements-azure.txt  
+          pip3 install -r /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_collections/azure/azcollection/requirements-azure.txt  
       - id: ansible
         working-directory: ${{ github.workspace }}/ansible
         env:

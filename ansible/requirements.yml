@@ -1,4 +1,7 @@
 collections:
-  - ansible.windows
-  - community.general
-  - azure.azcollection
+  - name: ansible.windows
+    version: 2.1.0
+  - name: community.general
+    version: 7.3.0
+  - name: azure.azcollection
+    version: 1.17.0
