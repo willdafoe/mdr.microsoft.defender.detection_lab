@@ -10,14 +10,6 @@ env:
   NAMESPACE: "microsoft defender"
   STAGE: "IntegrationTest"
   ENVIRONMENT: "dev"
-  TF_VAR_name: ${{ github.repository_owner }}
-  TF_VAR_namespace: ${{ env.NAMESPACE }}
-  TF_VAR_environment: ${{ env.ENVIRONMENT }}
-  TF_VAR_stage: ${{ env.STAGE }}
-  TF_VAR_location: eastus
-  TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
-  TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
-  TF_VAR_trusted_ips: '[ "${{ secrets.TRUSTED_IP }}", "${{ steps.runner_ip.outputs.runner_ip }}" ]'  
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -117,6 +109,15 @@ jobs:
         run: |
           terraform plan -input=false -out=terraform.plan \
           && terraform show -no-color terraform.plan
+        env:
+          TF_VAR_name: ${{ github.repository_owner }}
+          TF_VAR_namespace: ${{ env.NAMESPACE }}
+          TF_VAR_environment: ${{ env.ENVIRONMENT }}
+          TF_VAR_stage: ${{ env.STAGE }}
+          TF_VAR_location: eastus
+          TF_VAR_admin_username: ${{ secrets.ADMIN_USERNAME }}
+          TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
+          TF_VAR_trusted_ips: '[ "${{ secrets.TRUSTED_IP }}", "${{ steps.runner_ip.outputs.runner_ip }}" ]'  
       - name: Running Terraform Apply
         id: apply
         if: steps.plan.outcome == 'success'
