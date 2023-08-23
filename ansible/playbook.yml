@@ -1,5 +1,5 @@
 ---
-- name: "[ansible.play] configuring hosts"
+- name: "[ansible.play] win_ping"
   hosts: windows
   gather_facts: false
   ignore_errors: false
