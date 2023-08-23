@@ -3,8 +3,6 @@
   hosts: all
   gather_facts: false
   ignore_errors: false
-  collections:
-    - azure.azcollection
   vars:
     ansible_user: '{{ admin_username }}'
     ansible_password: '{{ admin_password }}'
