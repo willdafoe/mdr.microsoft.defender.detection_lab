@@ -27,7 +27,7 @@ jobs:
       - id: pip
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          pip install -r requirements.txt
+          pipx inject ansible-core pywinrm
       - name: Run Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2.6.1
         with:
