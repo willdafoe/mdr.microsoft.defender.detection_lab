@@ -28,6 +28,6 @@ jobs:
       - id: galaxy
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy collection install -r requirements.yml --force
+          ansible-galaxy collection install -r requirements.yml --force \
           && ansible-galaxy collection list
       
