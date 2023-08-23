@@ -33,7 +33,7 @@ jobs:
       - id: azure_rm
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ls /opt/pipx/venvs
+          ls /opt/pipx/venvs/ansible-core
 #          python3 -m pip install -r ./collections/ansible_collections/azure/#azcollection/requirements-azure.txt
       - id: inventory
         working-directory: ${{ github.workspace }}/ansible
