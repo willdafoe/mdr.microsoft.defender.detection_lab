@@ -30,4 +30,8 @@ jobs:
         run: |
           ansible-galaxy collection install -r requirements.yml --force \
           && ansible-galaxy collection list
+      - id: inventory
+        working-directory: ${{ github.workspace }}/ansible
+        run: |
+          ansible-inventory -i inventory/azure_rm.yml --list
       
