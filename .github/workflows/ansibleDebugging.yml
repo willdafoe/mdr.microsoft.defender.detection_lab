@@ -40,5 +40,5 @@ jobs:
       - id: cat
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          cat ./collections/ansible_collections/azure/azcollection/plugins/inventory/azure_rm.py
+          ls -lah
       
