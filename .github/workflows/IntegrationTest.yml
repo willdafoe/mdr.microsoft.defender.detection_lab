@@ -126,9 +126,9 @@ jobs:
         with:
           name: terraformstatefile
           path: ${{ github.workspace }}/terraform.tfstate      
-      - id: list
+      - id: ls
         run: |
-          ls ./collections
+          ls -lah
       - id: ansible-galaxy
         working-directory: ${{ github.workspace }}/ansible
         run: |
