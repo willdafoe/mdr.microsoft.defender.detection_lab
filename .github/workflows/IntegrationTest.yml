@@ -141,7 +141,7 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2.6.1
         with:
           playbook: playbook.yml
-          inventory: ./inventory/azure_rm.yml
+          inventory: azure_rm.yml
           requirements: galaxy-requirements.yml
           directory: ${{ github.workspace }}/ansible
           options: |     
