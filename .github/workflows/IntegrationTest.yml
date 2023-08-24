@@ -136,10 +136,6 @@ jobs:
         run: |
           credentials="~/.azure/credentials"
 
-          if [ ! -d "~/.azure" ]; then
-            mkdir ~/.azure/
-          fi
-
           if [ ! -f "$credentials_file" ]; then
             cat >>"$credentials_file"<<EOF
             [ ${{ env.AZURE_SUBSCRIPTION_ID }} ]
