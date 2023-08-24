@@ -12,3 +12,29 @@ WINDOWS_VIRTUAL_MACHINE:
       os_disk_size_gb: 128
       tags:
           role: "domain_controller"
+    windows_server:
+      vm_instance_count: 0
+      publisher: "MicrosoftWindowsServer"
+      offer: "WindowsServer"
+      sku: "2016-Datacenter"
+      allow_extension_operations: true
+      hotpatching_enabled: false
+      license_type: "Windows_Server"
+      provision_vm_agent: true
+      computer_name: "srv"
+      os_disk_size_gb: 128
+      tags:
+          role: "windows_server"
+    windows_client:
+      vm_instance_count: 0
+      publisher: "MicrosoftWindowsDesktop"
+      offer: "Windows-10"
+      sku: "win10-22h2-ent"
+      allow_extension_operations: true
+      hotpatching_enabled: false
+      license_type: "Windows_Client"
+      provision_vm_agent: true
+      computer_name: "win"
+      os_disk_size_gb: 128
+      tags:
+          role: "windows_client"

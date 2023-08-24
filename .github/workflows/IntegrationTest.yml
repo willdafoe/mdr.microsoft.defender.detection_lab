@@ -43,6 +43,8 @@ jobs:
           output_file: ${{ env.output_file }}
           variables: |
             domain_controller_count=1
+            windows_server_count=0
+            windows_client_count=0
       - id: runner_ip
         run: |
           RUNNER_IP=$(curl https://api.ipify.org)/32
@@ -130,24 +132,29 @@ jobs:
         uses: actions/setup-python@v4.7.0
         with:
           python-version: '3.10'
-      - id: galaxy
+      - id: ansible-playbook
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          /opt/pipx_bin/ansible-galaxy install -r galaxy-requirements.yml 
-      - id: pipx
-        working-directory: ${{ github.workspace }}/ansible
-        run: |
-          pipx inject ansible-core pywinrm requests-ntlm         
-      - name: Run Ansible playbook
-        uses: dawidd6/action-ansible-playbook@v2.6.1
-        with:
-          playbook: playbook.yml
-          requirements: galaxy-requirements.yml
-          directory: ${{ github.workspace }}/ansible
-          options: |     
-            -i ./inventory/azure_rm.yml
-            -e admin_username=${{ secrets.ADMIN_USERNAME }}
-            -e admin_password=${{ secrets.ADMIN_PASSWORD }}
-            --verbose              
+          source /opts/pipx/venvs/ansible-core/bin/activate
+          ansible-galaxy install -r galaxy-requirements.yml -p collections
+          python -m pip install -r collections/ansible_collections/azure/azcollection/requirements-azure.txt
+          ansible-playbook -i ./inventory/azure_rm.yml playbook.yml -e admin_username=${{ secrets.ADMIN_USERNAME }} -e admin_password=${{ secrets.ADMIN_PASSWORD }} --verbose
+
+
+#      - id: pipx
+#        working-directory: ${{ github.workspace }}/ansible
+#        run: |
+#          pipx inject ansible-core pywinrm requests-ntlm         
+#      - name: Run Ansible playbook
+#        uses: dawidd6/action-ansible-playbook@v2.6.1
+#        with:
+#          playbook: playbook.yml
+#          requirements: galaxy-requirements.yml
+#          directory: ${{ github.workspace }}/ansible
+#          options: |     
+#            -i ./inventory/azure_rm.yml
+#            -e admin_username=${{ secrets.ADMIN_USERNAME }}
+#            -e admin_password=${{ secrets.ADMIN_PASSWORD }}
+#            --verbose              
 
 
