@@ -74,7 +74,6 @@ module "windows_virtual_machine" {
   name                = var.name
   namespace           = var.namespace
   environment         = var.environment
-  user_data           = filebase64("${path.module}/scripts/ConfigureRemotingForAnsible.ps1")
   location            = var.location
   stage               = var.stage
   publisher           = each.value.publisher

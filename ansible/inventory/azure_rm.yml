@@ -1,8 +1,8 @@
 plugin: azure.azcollection.azure_rm
-auth_source: auto
+auth_source: credential_file
 include_vm_resource_groups:
     - "*"
-    
+
 conditional_groups:
     windows: "'MicrosoftWindows' in image.publisher"
     windows_servers: "'MicrosoftWindowsServer' in image.publisher"
