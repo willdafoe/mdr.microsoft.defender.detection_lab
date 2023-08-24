@@ -87,6 +87,7 @@ module "windows_virtual_machine" {
   admin_password      = var.admin_password
   subnet_id           = module.dynamic_subnets.subnet_id
   os_disk_size_gb     = each.value.os_disk_size_gb
+  enable_winrm        = true
   tags = merge(
     each.value.tags,
     local.tags
