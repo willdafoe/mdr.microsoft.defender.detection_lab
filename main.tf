@@ -68,7 +68,7 @@ resource "azurerm_subnet_network_security_group_association" "this" {
 module "windows_virtual_machine" {
   # tflint-ignore: null_value
   source              = "app.terraform.io/mdr-team/windows_virtual_machine/azure"
-  version             = "1.0.4"
+  version             = "1.0.5"
   for_each            = local.config.WINDOWS_VIRTUAL_MACHINE
   enabled             = var.enabled
   name                = var.name

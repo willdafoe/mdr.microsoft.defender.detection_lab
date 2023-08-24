@@ -25,7 +25,7 @@ locals {
       description                = "Allow RDP from trusted IP"
     },
     {
-      name                       = "winrm"
+      name                       = "winrm-http"
       priority                   = 1005
       access                     = "Allow"
       direction                  = "Inbound"
@@ -36,8 +36,19 @@ locals {
       description                = "Allow WinRM from trusted IP"
     },
     {
-      name                       = "windowsATA"
+      name                       = "winrm-https"
       priority                   = 1006
+      access                     = "Allow"
+      direction                  = "Inbound"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "5986"
+      destination_address_prefix = "*"
+      description                = "Allow WinRM from trusted IP"
+    },
+    {
+      name                       = "windowsATA"
+      priority                   = 1007
       access                     = "Allow"
       direction                  = "Inbound"
       protocol                   = "Tcp"
