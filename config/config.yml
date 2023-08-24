@@ -1,1 +1,14 @@
 WINDOWS_VIRTUAL_MACHINE:
+    domain_controller:
+      vm_instance_count: 0
+      publisher: "MicrosoftWindowsServer"
+      offer: "WindowsServer"
+      sku: "2016-Datacenter"
+      allow_extension_operations: true
+      hotpatching_enabled: false
+      license_type: "Windows_Server"
+      provision_vm_agent: true
+      computer_name: "dc"
+      os_disk_size_gb: 128
+      tags:
+          role: "domain_controller"

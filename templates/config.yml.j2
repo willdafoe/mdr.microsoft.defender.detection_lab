@@ -1,8 +1,5 @@
-{% set domain_controller_count = 1 | default(omit) -%}
-{% set windows_server_count = 0 | default(omit) -%}
-{% set windows_client_count = 1 | default(omit) -%}
 WINDOWS_VIRTUAL_MACHINE:
-{%- if domain_controller_count > 0 -%}
+{%- if domain_controller_count is defined -%}
 {% filter indent(width=2) %}
   domain_controller:
     vm_instance_count: {{ domain_controller_count }}
@@ -18,8 +15,10 @@ WINDOWS_VIRTUAL_MACHINE:
     tags:
         role: "domain_controller"
 {%- endfilter -%}
+{% else %}
+  NONE
 {%- endif -%}
-{%- if windows_server_count > 0 -%}
+{%- if windows_server_count is defined -%}
 {% filter indent(width=2) %}
   windows_server:
     vm_instance_count: {{ windows_server_count }}
@@ -36,7 +35,7 @@ WINDOWS_VIRTUAL_MACHINE:
         role: "windows_server"
 {%- endfilter -%}        
 {%- endif -%}
-{%- if windows_client_count > 0 -%}
+{%- if windows_client_count is defined -%}
 {% filter indent(width=2) %}
   windows_client:
     vm_instance_count: {{ windows_client_count  }}
