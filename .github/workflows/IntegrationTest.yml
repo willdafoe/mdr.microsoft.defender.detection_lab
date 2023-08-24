@@ -16,7 +16,6 @@ env:
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   AZURE_CLOUD_ENVIRONMENT: "AzureCloud"  
 
-
 jobs:
   integration_test:
     runs-on: ubuntu-latest
@@ -141,29 +140,10 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2.6.1
         with:
           playbook: playbook.yml
-          inventory: |
-            plugin: azure.azcollection.azure_rm
-            auth_source: auto
-            include_vm_resource_groups:
-              - "*"
-    
-            conditional_groups:
-              windows: "'MicrosoftWindows' in image.publisher"
-              windows_servers: "'MicrosoftWindowsServer' in image.publisher"
-              windows_clients: "'MicrosoftWindowsDesktop' in image.publisher"
-
-            keyed_groups:
-              - prefix: location
-                key: location
-              - prefix: os
-                key: image.offer
-              - prefix: role
-                key: tags.role
-              - prefix: app_name
-                key: tags.app_name
           requirements: galaxy-requirements.yml
           directory: ${{ github.workspace }}/ansible
           options: |     
+            -i ./inventory/azure_rm.yml
             -e admin_username=${{ secrets.ADMIN_USERNAME }}
             -e admin_password=${{ secrets.ADMIN_PASSWORD }}
             --verbose              
