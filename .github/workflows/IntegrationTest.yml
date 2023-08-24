@@ -136,14 +136,16 @@ jobs:
         run: |
           credentials="~/.azure/credentials"
 
-          if [ ! -f "$credentials_file" ]; then
-            cat >>"$credentials_file"<<EOF
+          if [ ! -f "$credentials" ]; then
+            cat >>"$credentials"<<EOF
             [ ${{ env.AZURE_SUBSCRIPTION_ID }} ]
-            client_id=${{ env.AZURE_CLIENT_ID }}
-            secret=${{ env.AZURE_CLIENT_SECRET }}
-            tenant=${{ env.AZURE_TENANT_ID }}
+            client_id='${{ env.AZURE_CLIENT_ID }}'
+            secret='${{ env.AZURE_CLIENT_SECRET }}'
+            tenant='${{ env.AZURE_TENANT_ID }}'
             cloud_environment=AzureCloud
             EOF
+          elif
+            cat "$credentials"
           fi
       - id: ansible-playbook
         working-directory: ${{ github.workspace }}/ansible
