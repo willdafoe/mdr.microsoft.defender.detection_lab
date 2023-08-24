@@ -135,7 +135,7 @@ jobs:
       - id: ansible-playbook
         working-directory: ${{ github.workspace }}/ansible
         run: |
-          ansible-galaxy install -r galaxy-requirements.yml -p collections
+          ansible-galaxy collection install -r galaxy-requirements.yml -p ./collections
           python -m pip install -r collections/ansible_collections/azure/azcollection/requirements-azure.txt
           ansible-playbook -i ./inventory/azure_rm.yml playbook.yml -e admin_username=${{ secrets.ADMIN_USERNAME }} -e admin_password=${{ secrets.ADMIN_PASSWORD }} --verbose
 
